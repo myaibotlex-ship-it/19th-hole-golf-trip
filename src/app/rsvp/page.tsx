@@ -1,89 +1,106 @@
-import type { Metadata } from "next";
+"use client";
+
+import { useState, type FormEvent } from "react";
 import { PageHeader } from "../components/PageHeader";
 
-export const metadata: Metadata = {
-  title: "RSVP — The 19th Hole",
-};
-
 export default function RSVPPage() {
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
+
+  if (submitted) {
+    return (
+      <>
+        <PageHeader
+          eyebrow="You're In"
+          title="See You There"
+          subtitle="We'll raise a glass in your honor. Details incoming."
+        />
+        <section className="section">
+          <div className="container-narrow text-center">
+            <div className="card py-12">
+              <p
+                className="font-[family-name:var(--font-display)] italic text-[length:var(--text-xl)] mb-4"
+                style={{ color: "var(--fg-primary)" }}
+              >
+                &ldquo;Any course. Every year.&rdquo;
+              </p>
+              <p style={{ color: "var(--fg-muted)" }}>
+                Your RSVP has been recorded. Check your email for confirmation.
+              </p>
+            </div>
+          </div>
+        </section>
+      </>
+    );
+  }
+
   return (
     <>
       <PageHeader
-        eyebrow="Roll Call"
-        title="Reserve Your Spot"
-        subtitle="The tee sheet waits for no one. Confirm your place."
+        eyebrow="Join the Tradition"
+        title="RSVP"
+        subtitle="Confirm your spot for the 2026 trip. Spaces are limited to the inner circle."
       />
 
       <section className="section">
         <div className="container-narrow">
-          <form
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "var(--space-6)",
-            }}
-          >
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-6)" }}>
+          <form onSubmit={handleSubmit} className="card">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
               <div>
-                <label htmlFor="firstName">First Name</label>
-                <input type="text" id="firstName" name="firstName" placeholder="Jack" />
+                <label htmlFor="name">Full Name</label>
+                <input type="text" id="name" name="name" required placeholder="e.g. Dan Rackley" />
               </div>
               <div>
-                <label htmlFor="lastName">Last Name</label>
-                <input type="text" id="lastName" name="lastName" placeholder="Nicklaus" />
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="email">Email</label>
-              <input type="email" id="email" name="email" placeholder="jack@thegoldengrip.com" />
-            </div>
-
-            <div>
-              <label htmlFor="phone">Phone</label>
-              <input type="tel" id="phone" name="phone" placeholder="(555) 867-5309" />
-            </div>
-
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-6)" }}>
-              <div>
-                <label htmlFor="handicap">Handicap Index</label>
-                <input type="number" id="handicap" name="handicap" placeholder="12" />
+                <label htmlFor="email">Email</label>
+                <input type="email" id="email" name="email" required placeholder="dan@example.com" />
               </div>
               <div>
-                <label htmlFor="shirtSize">Shirt Size</label>
-                <select id="shirtSize" name="shirtSize" defaultValue="">
-                  <option value="" disabled>Select size</option>
-                  <option value="S">Small</option>
-                  <option value="M">Medium</option>
-                  <option value="L">Large</option>
-                  <option value="XL">X-Large</option>
-                  <option value="XXL">XX-Large</option>
-                </select>
+                <label htmlFor="phone">Phone</label>
+                <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" />
+              </div>
+              <div>
+                <label htmlFor="handicap">Handicap</label>
+                <input type="number" id="handicap" name="handicap" min={0} max={54} placeholder="e.g. 14" />
               </div>
             </div>
 
-            <div>
+            <div className="mb-8">
+              <label htmlFor="shirt">Shirt Size</label>
+              <select id="shirt" name="shirt" defaultValue="">
+                <option value="" disabled>Select size</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+                <option>XXL</option>
+              </select>
+            </div>
+
+            <div className="mb-8">
               <label htmlFor="dietary">Dietary Restrictions</label>
-              <input type="text" id="dietary" name="dietary" placeholder="None" />
+              <input type="text" id="dietary" name="dietary" placeholder="None, vegetarian, gluten-free, etc." />
             </div>
 
-            <div>
-              <label htmlFor="notes">Notes for the Group</label>
+            <div className="mb-8">
+              <label htmlFor="notes">Notes</label>
               <textarea
                 id="notes"
                 name="notes"
                 rows={3}
-                placeholder="Arriving late Thursday, need a ride from the airport, etc."
-                style={{ resize: "vertical" }}
+                placeholder="Anything we should know \u2014 roommate preference, travel notes, trash talk..."
               />
             </div>
 
-            <div style={{ display: "flex", gap: "var(--space-4)", paddingTop: "var(--space-4)" }}>
+            <div className="flex gap-4">
               <button type="submit" className="btn-primary">
                 Confirm RSVP
               </button>
               <button type="reset" className="btn-ghost">
-                Clear Form
+                Clear
               </button>
             </div>
           </form>
