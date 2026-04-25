@@ -28,21 +28,17 @@ export function Navigation() {
     >
       <div className="container-wide">
         <div className="flex items-center justify-between py-4">
-          {/* Logo + Mark */}
-          <Link href="/" className="flex items-center gap-3 no-underline">
+          {/* Primary Logo */}
+          <Link href="/" className="flex items-center no-underline" style={{ padding: "var(--space-2) 0" }}>
             <Image
-              src="/assets/assets/logo-monogram.png"
+              src="/assets/assets/logo-primary.png"
               alt="The 19th Hole"
-              width={32}
-              height={32}
+              width={160}
+              height={48}
               className="object-contain"
+              style={{ minWidth: 160 }}
+              priority
             />
-            <span
-              className="font-[family-name:var(--font-eyebrow)] uppercase tracking-[0.16em] text-[length:var(--text-2xs)] font-semibold"
-              style={{ color: "var(--fg-primary)" }}
-            >
-              The 19th Hole
-            </span>
           </Link>
 
           {/* Desktop Nav */}

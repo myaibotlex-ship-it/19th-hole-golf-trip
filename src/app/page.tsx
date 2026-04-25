@@ -38,10 +38,10 @@ function CountdownUnit({ value, label }: { value: number; label: string }) {
 }
 
 const highlights = [
-  { icon: "⛳", title: "3 Rounds", desc: "Championship courses along the coast" },
-  { icon: "🏨", title: "4 Nights", desc: "Luxury lodging, two to a suite" },
-  { icon: "🥃", title: "19th Hole", desc: "Nightly gatherings. Stories optional." },
-  { icon: "🏆", title: "The Cup", desc: "Bragging rights for the year" },
+  { title: "3 Rounds", desc: "Championship courses along the coast" },
+  { title: "4 Nights", desc: "Luxury lodging, two to a suite" },
+  { title: "19th Hole", desc: "Nightly gatherings. Stories optional." },
+  { title: "The Cup", desc: "Bragging rights for the year" },
 ];
 
 export default function Home() {
@@ -50,18 +50,11 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="relative z-1 py-16 md:py-24 text-center">
+      <section className="relative z-1 py-24 md:py-36 text-center">
         <div className="container-base">
-          <Image
-            src="/assets/assets/logo-monogram.png"
-            alt="The 19th Hole monogram"
-            width={120}
-            height={120}
-            className="mx-auto mb-6 object-contain"
-            priority
-          />
+          <p className="eyebrow mb-6">Est. 2026</p>
           <h1
-            className="font-[family-name:var(--font-display)] font-black uppercase leading-[0.95] tracking-[-0.025em] mb-6"
+            className="font-[family-name:var(--font-display)] font-black uppercase leading-[0.95] tracking-[-0.025em] mb-8"
             style={{
               fontSize: "clamp(2.8rem, 8vw, 5.5rem)",
               color: "var(--fg-primary)",
@@ -70,13 +63,15 @@ export default function Home() {
             The 19th<br />
             <span className="italic font-bold">Hole</span>
           </h1>
+          <div className="gold-rule-ornament mb-8" style={{ color: "var(--accent)", fontSize: "var(--text-sm)" }}>
+            &#9873;
+          </div>
           <p
-            className="font-[family-name:var(--font-body)] text-[length:var(--text-md)] leading-[1.7] max-w-[56ch] mx-auto mb-8"
+            className="font-[family-name:var(--font-body)] text-[length:var(--text-md)] leading-[1.7] max-w-[56ch] mx-auto"
             style={{ color: "var(--fg-secondary)" }}
           >
             A tradition among friends. Stories that last a lifetime.
           </p>
-          <div className="gold-rule-ornament eyebrow mb-0">Est. 2026</div>
         </div>
       </section>
 
