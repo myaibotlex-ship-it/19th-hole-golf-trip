@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PageHeader } from "../components/PageHeader";
 
 export const metadata: Metadata = {
   title: "Itinerary — The 19th Hole",
@@ -46,27 +47,11 @@ const days = [
 export default function ItineraryPage() {
   return (
     <>
-      <section style={{ padding: "var(--space-8) 0 var(--space-4)", textAlign: "center" }}>
-        <div className="container-narrow">
-          <p className="eyebrow" style={{ marginBottom: "var(--space-3)" }}>
-            June 18–21, 2026
-          </p>
-          <h1
-            style={{
-              fontFamily: "var(--font-display)",
-              fontWeight: 700,
-              fontSize: "var(--text-3xl)",
-              color: "var(--fg-primary)",
-              marginBottom: "var(--space-3)",
-            }}
-          >
-            The Itinerary
-          </h1>
-          <p style={{ fontFamily: "var(--font-body)", color: "var(--fg-muted)", fontSize: "var(--text-base)" }}>
-            Four days. Three rounds. One tradition.
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        eyebrow="June 18–21, 2026"
+        title="The Itinerary"
+        subtitle="Four days. Three rounds. One tradition."
+      />
 
       {days.map((day, i) => (
         <section key={i} className="section">

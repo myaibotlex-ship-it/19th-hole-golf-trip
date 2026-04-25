@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PageHeader } from "../components/PageHeader";
 
 export const metadata: Metadata = {
   title: "RSVP — The 19th Hole",
@@ -7,27 +8,11 @@ export const metadata: Metadata = {
 export default function RSVPPage() {
   return (
     <>
-      <section style={{ padding: "var(--space-8) 0 var(--space-4)", textAlign: "center" }}>
-        <div className="container-narrow">
-          <p className="eyebrow" style={{ marginBottom: "var(--space-3)" }}>
-            Roll Call
-          </p>
-          <h1
-            style={{
-              fontFamily: "var(--font-display)",
-              fontWeight: 700,
-              fontSize: "var(--text-3xl)",
-              color: "var(--fg-primary)",
-              marginBottom: "var(--space-3)",
-            }}
-          >
-            Reserve Your Spot
-          </h1>
-          <p style={{ fontFamily: "var(--font-body)", color: "var(--fg-muted)", fontSize: "var(--text-base)" }}>
-            The tee sheet waits for no one. Confirm your place.
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        eyebrow="Roll Call"
+        title="Reserve Your Spot"
+        subtitle="The tee sheet waits for no one. Confirm your place."
+      />
 
       <section className="section">
         <div className="container-narrow">

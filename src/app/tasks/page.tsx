@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PageHeader } from "../components/PageHeader";
 
 export const metadata: Metadata = {
   title: "Tasks — The 19th Hole",
@@ -46,27 +47,11 @@ const priorityConfig: Record<string, { label: string; style: React.CSSProperties
 export default function TasksPage() {
   return (
     <>
-      <section style={{ padding: "var(--space-8) 0 var(--space-4)", textAlign: "center" }}>
-        <div className="container-narrow">
-          <p className="eyebrow" style={{ marginBottom: "var(--space-3)" }}>
-            Trip Planning
-          </p>
-          <h1
-            style={{
-              fontFamily: "var(--font-display)",
-              fontWeight: 700,
-              fontSize: "var(--text-3xl)",
-              color: "var(--fg-primary)",
-              marginBottom: "var(--space-3)",
-            }}
-          >
-            The Tasks
-          </h1>
-          <p style={{ fontFamily: "var(--font-body)", color: "var(--fg-muted)", fontSize: "var(--text-base)" }}>
-            Every great trip starts with a plan. Here&apos;s ours.
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        eyebrow="Trip Planning"
+        title="The Tasks"
+        subtitle="Every great trip starts with a plan. Here's ours."
+      />
 
       <section className="section">
         <div className="container-base">

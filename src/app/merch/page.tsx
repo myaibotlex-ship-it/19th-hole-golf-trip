@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { PageHeader } from "../components/PageHeader";
 
 export const metadata: Metadata = {
   title: "Merch — The 19th Hole",
@@ -15,7 +16,7 @@ const merchItems = [
   },
   {
     name: "The Fairway Tee",
-    description: "Soft cotton tee in ivory with full primary logo across the chest. The shirt you wear when you&apos;re not on the course.",
+    description: "Soft cotton tee in ivory with full primary logo across the chest. The shirt you wear when you're not on the course.",
     price: "$35",
     badge: null,
     logo: "/assets/assets/logo-primary.png",
@@ -53,27 +54,11 @@ const merchItems = [
 export default function MerchPage() {
   return (
     <>
-      <section style={{ padding: "var(--space-8) 0 var(--space-4)", textAlign: "center" }}>
-        <div className="container-narrow">
-          <p className="eyebrow" style={{ marginBottom: "var(--space-3)" }}>
-            Pro Shop
-          </p>
-          <h1
-            style={{
-              fontFamily: "var(--font-display)",
-              fontWeight: 700,
-              fontSize: "var(--text-3xl)",
-              color: "var(--fg-primary)",
-              marginBottom: "var(--space-3)",
-            }}
-          >
-            The Merch
-          </h1>
-          <p style={{ fontFamily: "var(--font-body)", color: "var(--fg-muted)", fontSize: "var(--text-base)" }}>
-            Gear for the members. Worn on and off the course.
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        eyebrow="Pro Shop"
+        title="The Merch"
+        subtitle="Gear for the members. Worn on and off the course."
+      />
 
       <section className="section">
         <div className="container-base">

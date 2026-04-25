@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PageHeader } from "../components/PageHeader";
 
 export const metadata: Metadata = {
   title: "Scores — The 19th Hole",
@@ -16,27 +17,11 @@ const players = [
 export default function ScoresPage() {
   return (
     <>
-      <section style={{ padding: "var(--space-8) 0 var(--space-4)", textAlign: "center" }}>
-        <div className="container-narrow">
-          <p className="eyebrow" style={{ marginBottom: "var(--space-3)" }}>
-            Leaderboard
-          </p>
-          <h1
-            style={{
-              fontFamily: "var(--font-display)",
-              fontWeight: 700,
-              fontSize: "var(--text-3xl)",
-              color: "var(--fg-primary)",
-              marginBottom: "var(--space-3)",
-            }}
-          >
-            The Scores
-          </h1>
-          <p style={{ fontFamily: "var(--font-body)", color: "var(--fg-muted)", fontSize: "var(--text-base)" }}>
-            Where legends are made and excuses are born.
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        eyebrow="Leaderboard"
+        title="The Scores"
+        subtitle="Where legends are made and excuses are born."
+      />
 
       <section className="section">
         <div className="container-base">
