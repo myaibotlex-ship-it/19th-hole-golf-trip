@@ -133,7 +133,7 @@ export default function ScoresPage() {
                             placeholder="\u2014"
                             className="w-20 text-center py-2 px-1"
                             style={{
-                              borderBottom: "1px solid var(--border-subtle)",
+                              borderBottom: "0.5px solid var(--border-subtle)",
                               fontFamily: "var(--font-mono)",
                               fontSize: "var(--text-sm)",
                             }}

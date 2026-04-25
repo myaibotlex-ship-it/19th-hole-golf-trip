@@ -87,7 +87,7 @@ export default function MerchPage() {
 
       <section className="section">
         <div className="container-wide">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {products.map((product) => (
               <div key={product.name} className="card flex flex-col">
                 {/* Product Image Area */}

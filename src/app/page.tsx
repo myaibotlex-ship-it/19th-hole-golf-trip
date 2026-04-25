@@ -97,19 +97,19 @@ export default function Home() {
       {/* Highlights */}
       <section className="section">
         <div className="container-base">
-          <p className="eyebrow text-center mb-2">The Trip</p>
+          <p className="eyebrow text-center mb-4">The Trip</p>
           <h2
-            className="font-[family-name:var(--font-display)] font-bold text-[length:var(--text-2xl)] text-center mb-10 leading-[1.1]"
+            className="font-[family-name:var(--font-display)] font-bold text-[length:var(--text-2xl)] text-center mb-12 leading-[1.1]"
             style={{ color: "var(--fg-primary)" }}
           >
             Good rounds. Great company.
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {highlights.map((h) => (
               <div key={h.title} className="card text-center">
-                <div className="text-4xl mb-3">{h.icon}</div>
+                <div style={{ color: "var(--accent)", fontSize: "var(--text-md)", marginBottom: "var(--space-4)" }}>&#9873;</div>
                 <h3
-                  className="font-[family-name:var(--font-display)] font-bold text-[length:var(--text-lg)] mb-2"
+                  className="font-[family-name:var(--font-display)] font-bold text-[length:var(--text-lg)] mb-3"
                   style={{ color: "var(--fg-primary)" }}
                 >
                   {h.title}
@@ -134,15 +134,15 @@ export default function Home() {
             alt="The 19th Hole primary logo"
             width={240}
             height={120}
-            className="mx-auto mb-8 object-contain"
+            className="mx-auto mb-10 object-contain"
           />
           <p
-            className="font-[family-name:var(--font-display)] italic text-[length:var(--text-xl)] md:text-[length:var(--text-2xl)] leading-[1.25] mb-8"
+            className="font-[family-name:var(--font-display)] italic text-[length:var(--text-xl)] md:text-[length:var(--text-2xl)] leading-[1.25] mb-10"
             style={{ color: "var(--fg-primary)" }}
           >
             &ldquo;Lost Balls. Found Memories.&rdquo;
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-5 justify-center">
             <Link href="/rsvp" className="btn-primary no-underline">
               RSVP Now
             </Link>
