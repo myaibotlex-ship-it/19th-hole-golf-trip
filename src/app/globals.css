@@ -440,3 +440,28 @@ label {
   background: var(--color-sand);
   color: var(--color-forest);
 }
+
+/* Ghost button variant for use on dark/photo backgrounds */
+.btn-ghost-light {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  background: transparent;
+  color: var(--color-ivory);
+  font-family: var(--font-eyebrow), sans-serif;
+  font-weight: 600;
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  border: 1px solid rgba(243, 239, 230, 0.7);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--duration-base) var(--ease-standard);
+}
+
+.btn-ghost-light:hover {
+  background: rgba(243, 239, 230, 0.15);
+  border-color: var(--color-ivory);
+}

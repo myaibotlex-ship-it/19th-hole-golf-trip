@@ -1,109 +1,91 @@
-"use client";
-
-import { useState, type FormEvent } from "react";
 import { PageHeader } from "../components/PageHeader";
 
+type Attendee = {
+  name: string;
+  captain?: boolean;
+};
+
+const attendees: Attendee[] = [
+  { name: "Dan Rackley", captain: true },
+  { name: "David McClain" },
+  { name: "Ryan Blake" },
+  { name: "Casey Costa" },
+  { name: "Ryan Roth" },
+  { name: "Grant Anderson" },
+  { name: "Casper Heuckroth" },
+  { name: "Eric Mehrten" },
+];
+
+function GolfFlag() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+      <path d="M8 22 L8 4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+      <path d="M8 4 Q14 5 18 7 Q14 9 8 10 Z" fill="currentColor" />
+      <circle cx="8" cy="3" r="1.2" fill="currentColor" />
+    </svg>
+  );
+}
+
 export default function RSVPPage() {
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
-
-  if (submitted) {
-    return (
-      <>
-        <PageHeader
-          eyebrow="You're In"
-          title="See You There"
-          subtitle="We'll raise a glass in your honor. Details incoming."
-        />
-        <section className="section">
-          <div className="container-narrow text-center">
-            <div className="card py-12">
-              <p
-                className="font-[family-name:var(--font-display)] italic text-[length:var(--text-xl)] mb-4"
-                style={{ color: "var(--fg-primary)" }}
-              >
-                &ldquo;Any course. Every year.&rdquo;
-              </p>
-              <p style={{ color: "var(--fg-muted)" }}>
-                Your RSVP has been recorded. Check your email for confirmation.
-              </p>
-            </div>
-          </div>
-        </section>
-      </>
-    );
-  }
-
   return (
     <>
       <PageHeader
-        eyebrow="Join the Tradition"
+        eyebrow="The Squad"
         title="RSVP"
-        subtitle="Confirm your spot for the 2026 trip. Spaces are limited to the inner circle."
+        subtitle="Eight confirmed. All paid. See you in Utah."
       />
 
       <section className="section">
         <div className="container-narrow">
-          <form onSubmit={handleSubmit} className="card">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-              <div>
-                <label htmlFor="name">Full Name</label>
-                <input type="text" id="name" name="name" required placeholder="e.g. Dan Rackley" />
-              </div>
-              <div>
-                <label htmlFor="email">Email</label>
-                <input type="email" id="email" name="email" required placeholder="dan@example.com" />
-              </div>
-              <div>
-                <label htmlFor="phone">Phone</label>
-                <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" />
-              </div>
-              <div>
-                <label htmlFor="handicap">Handicap</label>
-                <input type="number" id="handicap" name="handicap" min={0} max={54} placeholder="e.g. 14" />
-              </div>
-            </div>
+          <div className="flex items-center justify-between mb-6">
+            <p className="eyebrow">Confirmed Attendees</p>
+            <span className="tag tag-sage">8 / 8</span>
+          </div>
 
-            <div className="mb-8">
-              <label htmlFor="shirt">Shirt Size</label>
-              <select id="shirt" name="shirt" defaultValue="">
-                <option value="" disabled>Select size</option>
-                <option>S</option>
-                <option>M</option>
-                <option>L</option>
-                <option>XL</option>
-                <option>XXL</option>
-              </select>
-            </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {attendees.map((a) => (
+              <div
+                key={a.name}
+                className="card flex items-center justify-between gap-4"
+                style={{ padding: "var(--space-4) var(--space-5)" }}
+              >
+                <div className="flex items-center gap-3">
+                  <span style={{ color: "var(--accent)", flexShrink: 0 }}>
+                    <GolfFlag />
+                  </span>
+                  <div>
+                    <p
+                      className="font-[family-name:var(--font-body)] font-medium text-[length:var(--text-sm)]"
+                      style={{ color: "var(--fg-primary)" }}
+                    >
+                      {a.name}
+                    </p>
+                    {a.captain && (
+                      <p
+                        className="font-[family-name:var(--font-eyebrow)] font-semibold uppercase text-[length:var(--text-3xs)] tracking-[0.12em]"
+                        style={{ color: "var(--fg-muted)" }}
+                      >
+                        Captain
+                      </p>
+                    )}
+                  </div>
+                </div>
+                <span className="tag tag-sage flex-shrink-0">Confirmed</span>
+              </div>
+            ))}
+          </div>
 
-            <div className="mb-8">
-              <label htmlFor="dietary">Dietary Restrictions</label>
-              <input type="text" id="dietary" name="dietary" placeholder="None, vegetarian, gluten-free, etc." />
-            </div>
-
-            <div className="mb-8">
-              <label htmlFor="notes">Notes</label>
-              <textarea
-                id="notes"
-                name="notes"
-                rows={3}
-                placeholder="Anything we should know \u2014 roommate preference, travel notes, trash talk..."
-              />
-            </div>
-
-            <div className="flex gap-4">
-              <button type="submit" className="btn-primary">
-                Confirm RSVP
-              </button>
-              <button type="reset" className="btn-ghost">
-                Clear
-              </button>
-            </div>
-          </form>
+          <div
+            className="mt-8 pt-6"
+            style={{ borderTop: "0.5px solid var(--border-subtle)" }}
+          >
+            <p
+              className="font-[family-name:var(--font-display)] italic text-[length:var(--text-lg)] text-center"
+              style={{ color: "var(--fg-secondary)" }}
+            >
+              &ldquo;Any course. Every year.&rdquo;
+            </p>
+          </div>
         </div>
       </section>
     </>

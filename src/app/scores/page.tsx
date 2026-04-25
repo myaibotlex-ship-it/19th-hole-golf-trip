@@ -9,17 +9,29 @@ type PlayerScores = {
   rounds: (number | null)[];
 };
 
+const ROUND_COUNT = 6;
+
 const INITIAL_PLAYERS: PlayerScores[] = [
-  { name: "Dan", handicap: 14, rounds: [null, null, null] },
-  { name: "Mike", handicap: 8, rounds: [null, null, null] },
-  { name: "Chris", handicap: 18, rounds: [null, null, null] },
-  { name: "Jake", handicap: 11, rounds: [null, null, null] },
-  { name: "Tom", handicap: 22, rounds: [null, null, null] },
-  { name: "Will", handicap: 6, rounds: [null, null, null] },
+  { name: "Dan Rackley", handicap: 14, rounds: Array(ROUND_COUNT).fill(null) },
+  { name: "David McClain", handicap: 12, rounds: Array(ROUND_COUNT).fill(null) },
+  { name: "Ryan Blake", handicap: 10, rounds: Array(ROUND_COUNT).fill(null) },
+  { name: "Casey Costa", handicap: 16, rounds: Array(ROUND_COUNT).fill(null) },
+  { name: "Ryan Roth", handicap: 18, rounds: Array(ROUND_COUNT).fill(null) },
+  { name: "Grant Anderson", handicap: 8, rounds: Array(ROUND_COUNT).fill(null) },
+  { name: "Casper Heuckroth", handicap: 20, rounds: Array(ROUND_COUNT).fill(null) },
+  { name: "Eric Mehrten", handicap: 15, rounds: Array(ROUND_COUNT).fill(null) },
 ];
 
-const ROUNDS = ["Bandon Dunes", "Pacific Dunes", "Old Macdonald"];
-const STORAGE_KEY = "19th-hole-scores";
+const ROUNDS = [
+  "Black Desert",
+  "The Ledges",
+  "Coral Canyon",
+  "Wolf Creek",
+  "Sand Hollow",
+  "Copper Rock",
+];
+
+const STORAGE_KEY = "19th-hole-scores-utah";
 
 export default function ScoresPage() {
   const [players, setPlayers] = useState<PlayerScores[]>(INITIAL_PLAYERS);
@@ -58,7 +70,8 @@ export default function ScoresPage() {
 
   const netTotal = (p: PlayerScores) => {
     const played = p.rounds.filter((r) => r !== null).length;
-    return grossTotal(p) - Math.round((p.handicap * played) / 3);
+    if (played === 0) return 0;
+    return grossTotal(p) - Math.round((p.handicap * played) / ROUND_COUNT);
   };
 
   const sorted = [...players].sort((a, b) => {
@@ -78,9 +91,9 @@ export default function ScoresPage() {
   return (
     <>
       <PageHeader
-        eyebrow="The Leaderboard"
+        eyebrow="June 3–7, 2026 · Utah"
         title="Scores"
-        subtitle="Track every round. Editable \u2014 click any cell to enter scores."
+        subtitle="Track every round. Editable — click any cell to enter scores."
       />
 
       <section className="section">
@@ -116,7 +129,7 @@ export default function ScoresPage() {
                         className="font-[family-name:var(--font-display)] font-bold text-[length:var(--text-lg)]"
                         style={{ color: rank === 0 && hasScores ? "var(--color-gold)" : "var(--fg-muted)" }}
                       >
-                        {hasScores ? rank + 1 : "\u2014"}
+                        {hasScores ? rank + 1 : "—"}
                       </td>
                       <td className="font-semibold whitespace-nowrap">{player.name}</td>
                       <td>
@@ -130,7 +143,7 @@ export default function ScoresPage() {
                             max={150}
                             value={score ?? ""}
                             onChange={(e) => updateScore(origIdx, rIdx, e.target.value)}
-                            placeholder="\u2014"
+                            placeholder="—"
                             className="w-20 text-center py-2 px-1"
                             style={{
                               borderBottom: "0.5px solid var(--border-subtle)",
@@ -141,13 +154,13 @@ export default function ScoresPage() {
                         </td>
                       ))}
                       <td className="font-[family-name:var(--font-mono)] font-semibold">
-                        {hasScores ? grossTotal(player) : "\u2014"}
+                        {hasScores ? grossTotal(player) : "—"}
                       </td>
                       <td
                         className="font-[family-name:var(--font-mono)] font-bold"
                         style={{ color: hasScores ? "var(--color-forest)" : "var(--fg-muted)" }}
                       >
-                        {hasScores ? netTotal(player) : "\u2014"}
+                        {hasScores ? netTotal(player) : "—"}
                       </td>
                     </tr>
                   );
@@ -160,7 +173,7 @@ export default function ScoresPage() {
             className="mt-6 text-[length:var(--text-xs)] italic"
             style={{ color: "var(--fg-muted)" }}
           >
-            Net = Gross - (Handicap \u00d7 Rounds Played / 3). Scores saved to your browser.
+            Net = Gross &minus; (Handicap &times; Rounds Played / {ROUND_COUNT}). Scores saved to your browser.
           </p>
         </div>
       </section>

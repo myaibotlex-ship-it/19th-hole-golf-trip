@@ -27,18 +27,28 @@ export function Navigation() {
       style={{ borderColor: "var(--border-subtle)", background: "var(--bg-page)", borderBottomWidth: "0.5px" }}
     >
       <div className="container-wide">
-        <div className="flex items-center justify-between py-4">
-          {/* Primary Logo */}
-          <Link href="/" className="flex items-center no-underline" style={{ padding: "var(--space-2) 0" }}>
+        <div className="flex items-center justify-between" style={{ height: "68px" }}>
+          {/* Compact monogram + wordmark */}
+          <Link href="/" className="flex items-center gap-3 no-underline" style={{ padding: "var(--space-2) 0" }}>
             <Image
-              src="/assets/assets/logo-primary.png"
+              src="/assets/assets/logo-monogram.png"
               alt="The 19th Hole"
-              width={160}
-              height={48}
-              className="object-contain"
-              style={{ minWidth: 160 }}
+              width={36}
+              height={36}
+              className="object-contain flex-shrink-0"
               priority
             />
+            <span
+              className="font-[family-name:var(--font-display)] font-bold uppercase hidden sm:block"
+              style={{
+                fontSize: "var(--text-sm)",
+                letterSpacing: "0.06em",
+                color: "var(--fg-primary)",
+                lineHeight: 1,
+              }}
+            >
+              The 19th Hole
+            </span>
           </Link>
 
           {/* Desktop Nav */}
@@ -73,7 +83,7 @@ export function Navigation() {
             </button>
           </nav>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile controls */}
           <div className="flex items-center gap-2 md:hidden">
             <button
               onClick={toggle}
