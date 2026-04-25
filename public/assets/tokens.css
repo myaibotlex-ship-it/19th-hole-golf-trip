@@ -1,0 +1,141 @@
+/* ==========================================================================
+   The 19th Hole — Golf Trip Club
+   Brand Tokens · v1.0 · Est. 2026
+   --------------------------------------------------------------------------
+   Drop this into your project and reference variables via var(--token-name).
+   Designed for light surfaces by default; dark-mode overrides at bottom.
+   ========================================================================== */
+
+:root {
+  /* --------------------------------------------------------------------
+     COLOR — CORE PALETTE
+     -------------------------------------------------------------------- */
+  --color-forest:  #1F3D2E;   /* Primary brand · headlines, logo lockup       */
+  --color-navy:    #132B45;   /* Deep support · nav, footers, formal contexts */
+  --color-sand:    #D8C8A6;   /* Warm neutral · cards, inset surfaces         */
+  --color-ivory:   #F3EFE6;   /* Page background · the "paper"                */
+  --color-gold:    #CDA24E;   /* Accent · rules, dividers, ornament, CTAs     */
+  --color-sage:    #8CA28A;   /* Soft secondary · tags, muted UI              */
+
+  /* --------------------------------------------------------------------
+     COLOR — SEMANTIC ROLES
+     -------------------------------------------------------------------- */
+  --bg-page:        var(--color-ivory);
+  --bg-surface:     #FBF8F1;        /* slightly lifted ivory */
+  --bg-inset:       var(--color-sand);
+  --bg-inverse:     var(--color-forest);
+
+  --fg-primary:     var(--color-forest);
+  --fg-secondary:   #3D4A3F;
+  --fg-muted:       #6B6F62;
+  --fg-on-dark:     var(--color-ivory);
+  --fg-on-gold:     var(--color-forest);
+
+  --accent:         var(--color-gold);
+  --accent-soft:    #E6D5A8;        /* tinted gold for hover/wash */
+  --rule:           var(--color-gold);
+  --border-subtle:  rgba(31, 61, 46, 0.14);
+  --border-strong:  rgba(31, 61, 46, 0.32);
+
+  --status-success: #4A6B3A;
+  --status-warning: #B8821C;
+  --status-error:   #8B2E2E;
+
+  /* --------------------------------------------------------------------
+     TYPOGRAPHY
+     -------------------------------------------------------------------- */
+  --font-display: "Playfair Display", "Hoefler Text", Georgia, serif;
+  --font-eyebrow: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  --font-body:    "Lora", Georgia, "Times New Roman", serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Modular scale · 1.250 (major third) anchored at 16px */
+  --text-3xs: 0.694rem;   /* 11.1px · micro-caps, legal     */
+  --text-2xs: 0.75rem;    /* 12px   · eyebrow, labels       */
+  --text-xs:  0.875rem;   /* 14px   · captions              */
+  --text-sm:  1rem;       /* 16px   · body small            */
+  --text-base:1.125rem;   /* 18px   · body                  */
+  --text-md:  1.25rem;    /* 20px   · lede                  */
+  --text-lg:  1.563rem;   /* 25px   · h4                    */
+  --text-xl:  1.953rem;   /* 31px   · h3                    */
+  --text-2xl: 2.441rem;   /* 39px   · h2                    */
+  --text-3xl: 3.052rem;   /* 49px   · h1                    */
+  --text-4xl: 3.815rem;   /* 61px   · display               */
+  --text-5xl: 4.768rem;   /* 76px   · hero display          */
+
+  --leading-tight:  1.1;
+  --leading-snug:   1.25;
+  --leading-normal: 1.5;
+  --leading-loose:  1.7;
+
+  --tracking-tight:  -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide:   0.08em;
+  --tracking-wider:  0.16em;   /* eyebrow / smallcaps */
+  --tracking-widest: 0.28em;   /* monogram-style labels */
+
+  --weight-regular: 400;
+  --weight-medium:  500;
+  --weight-semi:    600;
+  --weight-bold:    700;
+
+  /* --------------------------------------------------------------------
+     SPACING · 4px base
+     -------------------------------------------------------------------- */
+  --space-0:   0;
+  --space-1:   0.25rem;   /*  4px */
+  --space-2:   0.5rem;    /*  8px */
+  --space-3:   0.75rem;   /* 12px */
+  --space-4:   1rem;      /* 16px */
+  --space-5:   1.5rem;    /* 24px */
+  --space-6:   2rem;      /* 32px */
+  --space-7:   3rem;      /* 48px */
+  --space-8:   4rem;      /* 64px */
+  --space-9:   6rem;      /* 96px */
+  --space-10:  8rem;      /* 128px */
+
+  /* --------------------------------------------------------------------
+     RADII · understated, never trendy
+     -------------------------------------------------------------------- */
+  --radius-none: 0;
+  --radius-sm:   2px;
+  --radius-md:   4px;
+  --radius-lg:   8px;
+  --radius-pill: 999px;
+
+  /* --------------------------------------------------------------------
+     SHADOWS · subtle, paper-like
+     -------------------------------------------------------------------- */
+  --shadow-sm:  0 1px 2px rgba(31, 61, 46, 0.06);
+  --shadow-md:  0 4px 14px rgba(31, 61, 46, 0.08);
+  --shadow-lg:  0 18px 40px -12px rgba(31, 61, 46, 0.18);
+  --shadow-inset: inset 0 0 0 1px var(--border-subtle);
+
+  /* --------------------------------------------------------------------
+     LAYOUT
+     -------------------------------------------------------------------- */
+  --container-narrow: 720px;
+  --container-base:   1080px;
+  --container-wide:   1280px;
+
+  --duration-fast: 120ms;
+  --duration-base: 220ms;
+  --duration-slow: 420ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* ==========================================================================
+   DARK MODE — "After Hours at the Clubhouse"
+   ========================================================================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-page:    #0F1F18;
+    --bg-surface: #16291F;
+    --bg-inset:   #1F3A2C;
+    --fg-primary: var(--color-ivory);
+    --fg-secondary: #C9D1C5;
+    --fg-muted:   #8E978A;
+    --border-subtle: rgba(243, 239, 230, 0.12);
+    --border-strong: rgba(243, 239, 230, 0.28);
+  }
+}

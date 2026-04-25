@@ -1,0 +1,1036 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The 19th Hole — Brand Kit</title>
+<link rel="stylesheet" href="tokens.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@500;600;700&family=Lora:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg-page);
+    color: var(--fg-primary);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Subtle paper texture */
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(rgba(31,61,46,0.025) 1px, transparent 1px),
+      radial-gradient(rgba(31,61,46,0.018) 1px, transparent 1px);
+    background-size: 3px 3px, 7px 7px;
+    background-position: 0 0, 1px 2px;
+    z-index: 0;
+  }
+  main, header, footer { position: relative; z-index: 1; }
+
+  .container { max-width: var(--container-wide); margin: 0 auto; padding: 0 var(--space-6); }
+
+  /* ============== TYPE UTILITIES ============== */
+  .display { font-family: var(--font-display); font-weight: 900; letter-spacing: var(--tracking-tight); line-height: var(--leading-tight); }
+  .serif   { font-family: var(--font-display); }
+  .sans    { font-family: var(--font-eyebrow); }
+  .body    { font-family: var(--font-body); }
+  .mono    { font-family: var(--font-mono); }
+
+  .eyebrow {
+    font-family: var(--font-eyebrow);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    font-size: var(--text-2xs);
+    color: var(--color-gold);
+  }
+  .lede {
+    font-family: var(--font-body);
+    font-size: var(--text-md);
+    line-height: var(--leading-loose);
+    color: var(--fg-secondary);
+    max-width: 56ch;
+  }
+
+  /* ============== TOP BAR ============== */
+  .topbar {
+    border-bottom: 1px solid var(--border-subtle);
+    background: var(--bg-page);
+    padding: var(--space-4) 0;
+  }
+  .topbar-inner {
+    display: flex; align-items: center; justify-content: space-between; gap: var(--space-5);
+  }
+  .topbar-mark {
+    display: flex; align-items: center; gap: var(--space-3);
+    font-family: var(--font-eyebrow);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    font-size: var(--text-2xs);
+    color: var(--fg-primary);
+  }
+  .topbar-mark img { width: 28px; height: 28px; object-fit: contain; }
+  .topbar-nav {
+    display: flex; gap: var(--space-5);
+    font-family: var(--font-eyebrow);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    font-size: var(--text-3xs);
+    color: var(--fg-muted);
+  }
+  .topbar-nav a { color: inherit; text-decoration: none; }
+  .topbar-nav a:hover { color: var(--color-forest); }
+  .topbar-meta { font-family: var(--font-eyebrow); font-size: var(--text-3xs); letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--fg-muted); }
+
+  /* ============== HERO ============== */
+  .hero { padding: var(--space-9) 0 var(--space-8); text-align: center; }
+  .hero-monogram { width: 140px; height: 140px; margin: 0 auto var(--space-5); display: block; object-fit: contain; }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(3.2rem, 8vw, 6rem);
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+    margin: 0;
+    color: var(--color-forest);
+    text-transform: uppercase;
+  }
+  .hero h1 .ital { font-style: italic; font-weight: 700; }
+  .hero-sub {
+    margin: var(--space-5) auto 0;
+    max-width: 60ch;
+    color: var(--fg-secondary);
+    font-size: var(--text-md);
+  }
+  .hero-rule {
+    display: flex; align-items: center; gap: var(--space-3); justify-content: center;
+    margin-top: var(--space-6);
+    font-family: var(--font-eyebrow);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-widest);
+    font-size: var(--text-3xs);
+    color: var(--color-gold);
+  }
+  .hero-rule::before, .hero-rule::after {
+    content: ""; height: 1px; width: 80px; background: var(--color-gold); opacity: 0.6;
+  }
+
+  /* ============== SECTION ============== */
+  section.kit { padding: var(--space-8) 0; border-top: 1px solid var(--border-subtle); }
+  .section-head { display: grid; grid-template-columns: 220px 1fr; gap: var(--space-7); align-items: baseline; margin-bottom: var(--space-7); }
+  @media (max-width: 720px) { .section-head { grid-template-columns: 1fr; gap: var(--space-3); } }
+  .section-head .num {
+    font-family: var(--font-eyebrow);
+    font-weight: 600;
+    font-size: var(--text-2xs);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--color-gold);
+  }
+  .section-head h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-2xl);
+    line-height: 1.1;
+    margin: 0 0 var(--space-3);
+    color: var(--color-forest);
+  }
+  .section-head p { margin: 0; color: var(--fg-secondary); max-width: 60ch; }
+
+  /* ============== LOGO GRID ============== */
+  .logo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-5); }
+  @media (max-width: 900px) { .logo-grid { grid-template-columns: 1fr; } }
+  .logo-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    padding: var(--space-6);
+    display: flex; flex-direction: column; align-items: center; gap: var(--space-4);
+    aspect-ratio: 1 / 1.05;
+    position: relative;
+  }
+  .logo-card.dark { background: var(--color-forest); }
+  .logo-card.sand { background: var(--color-sand); }
+  .logo-card img { max-width: 78%; max-height: 70%; object-fit: contain; }
+  .logo-card .label {
+    position: absolute; top: var(--space-4); left: var(--space-4);
+    font-family: var(--font-eyebrow); font-size: var(--text-3xs); font-weight: 600;
+    letter-spacing: var(--tracking-wider); text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+  .logo-card.dark .label { color: var(--color-sand); }
+  .logo-card .caption {
+    margin-top: auto;
+    font-family: var(--font-eyebrow);
+    font-size: var(--text-3xs);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+  .logo-card.dark .caption { color: var(--color-sand); }
+
+  .clearspace-demo {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    padding: var(--space-6);
+    margin-top: var(--space-5);
+    display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); align-items: center;
+  }
+  @media (max-width: 720px) { .clearspace-demo { grid-template-columns: 1fr; } }
+  .clearspace-stage {
+    position: relative;
+    background: var(--bg-page);
+    border: 1px dashed var(--color-gold);
+    padding: 12%;
+    aspect-ratio: 1.4 / 1;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .clearspace-stage img { max-width: 70%; max-height: 70%; object-fit: contain; }
+  .clearspace-stage::before {
+    content: "x"; position: absolute; top: 4%; left: 50%; transform: translateX(-50%);
+    font-family: var(--font-eyebrow); font-size: var(--text-3xs); color: var(--color-gold); font-style: italic;
+  }
+  .clearspace-stage::after {
+    content: "x"; position: absolute; bottom: 4%; left: 50%; transform: translateX(-50%);
+    font-family: var(--font-eyebrow); font-size: var(--text-3xs); color: var(--color-gold); font-style: italic;
+  }
+
+  /* ============== COLORS ============== */
+  .color-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--space-4); }
+  @media (max-width: 900px) { .color-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 480px) { .color-grid { grid-template-columns: repeat(2, 1fr); } }
+  .swatch {
+    display: flex; flex-direction: column;
+  }
+  .swatch .chip {
+    height: 220px;
+    border: 1px solid var(--border-subtle);
+    position: relative;
+  }
+  .swatch .chip .var {
+    position: absolute; top: var(--space-3); left: var(--space-3);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.04em;
+  }
+  .swatch.light .chip .var { color: rgba(31,61,46,0.55); }
+  .swatch .meta { padding: var(--space-3) 0; }
+  .swatch .name {
+    font-family: var(--font-eyebrow);
+    font-size: var(--text-2xs);
+    font-weight: 600;
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--fg-primary);
+  }
+  .swatch .hex {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--fg-muted);
+    margin-top: 2px;
+  }
+  .swatch .role {
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    color: var(--fg-muted);
+    margin-top: var(--space-2);
+    line-height: 1.4;
+  }
+
+  .ratio-bar { display: flex; height: 56px; margin-top: var(--space-6); border: 1px solid var(--border-subtle); }
+  .ratio-bar > div {
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-eyebrow); font-size: var(--text-3xs);
+    text-transform: uppercase; letter-spacing: var(--tracking-wider);
+  }
+
+  /* ============== TYPE ============== */
+  .type-stack { display: grid; gap: var(--space-5); }
+  .type-row {
+    display: grid; grid-template-columns: 200px 1fr; gap: var(--space-6);
+    padding: var(--space-5) 0;
+    border-top: 1px solid var(--border-subtle);
+    align-items: baseline;
+  }
+  .type-row:first-child { border-top: none; }
+  @media (max-width: 720px) { .type-row { grid-template-columns: 1fr; } }
+  .type-row .meta {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--fg-muted);
+    line-height: 1.5;
+  }
+  .type-row .meta strong { color: var(--fg-primary); display: block; font-family: var(--font-eyebrow); font-weight: 600; letter-spacing: var(--tracking-wider); text-transform: uppercase; font-size: var(--text-2xs); margin-bottom: 4px; }
+  .type-sample.hero-display {
+    font-family: var(--font-display); font-weight: 900;
+    font-size: clamp(3rem, 6vw, 4.5rem); line-height: 0.95;
+    letter-spacing: -0.025em; color: var(--color-forest);
+    text-transform: uppercase;
+  }
+  .type-sample.h1 { font-family: var(--font-display); font-weight: 700; font-size: var(--text-3xl); color: var(--color-forest); line-height: 1.05; }
+  .type-sample.h2 { font-family: var(--font-display); font-weight: 700; font-size: var(--text-2xl); color: var(--color-forest); line-height: 1.1; }
+  .type-sample.eyebrow-sample { font-family: var(--font-eyebrow); font-weight: 600; font-size: var(--text-2xs); letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--color-gold); }
+  .type-sample.body-sample { font-family: var(--font-body); font-weight: 400; font-size: var(--text-base); line-height: 1.6; color: var(--fg-secondary); max-width: 60ch; }
+  .type-sample.mono-sample { font-family: var(--font-mono); font-size: var(--text-sm); color: var(--fg-secondary); }
+
+  /* ============== TAGLINES ============== */
+  .taglines {
+    display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 0;
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  @media (max-width: 720px) { .taglines { grid-template-columns: 1fr; } }
+  .tagline {
+    padding: var(--space-7) var(--space-5);
+    border-left: 1px solid var(--border-subtle);
+  }
+  .tagline:first-child { border-left: none; }
+  .tagline .role {
+    font-family: var(--font-eyebrow); font-weight: 600; font-size: var(--text-3xs);
+    text-transform: uppercase; letter-spacing: var(--tracking-wider); color: var(--color-gold);
+    margin-bottom: var(--space-3);
+  }
+  .tagline .line {
+    font-family: var(--font-display); font-weight: 700;
+    line-height: 1.05; color: var(--color-forest);
+    text-transform: uppercase;
+  }
+  .tagline.primary .line { font-size: var(--text-xl); }
+  .tagline.secondary .line { font-size: var(--text-lg); }
+  .tagline.tertiary .line { font-size: var(--text-lg); font-style: italic; font-weight: 400; }
+
+  /* ============== VOICE ============== */
+  .voice { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); }
+  @media (max-width: 720px) { .voice { grid-template-columns: 1fr; } }
+  .voice-col {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    padding: var(--space-6);
+  }
+  .voice-col h3 {
+    font-family: var(--font-eyebrow); font-weight: 700; font-size: var(--text-2xs);
+    text-transform: uppercase; letter-spacing: var(--tracking-wider);
+    margin: 0 0 var(--space-4);
+    display: flex; align-items: center; gap: var(--space-3);
+  }
+  .voice-col.do h3 { color: var(--color-forest); }
+  .voice-col.dont h3 { color: var(--status-error); }
+  .voice-col h3 .badge {
+    width: 18px; height: 18px; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700;
+  }
+  .voice-col.do h3 .badge { background: var(--color-forest); color: var(--color-ivory); }
+  .voice-col.dont h3 .badge { background: transparent; border: 1px solid var(--status-error); color: var(--status-error); }
+  .voice-col ul { margin: 0; padding: 0; list-style: none; }
+  .voice-col li {
+    font-family: var(--font-body); font-size: var(--text-base); line-height: 1.55;
+    padding: var(--space-3) 0;
+    border-top: 1px solid var(--border-subtle);
+    color: var(--fg-secondary);
+  }
+  .voice-col li:first-child { border-top: none; padding-top: 0; }
+  .voice-col li::before { content: "—"; color: var(--color-gold); margin-right: var(--space-2); }
+
+  /* ============== COMPONENTS ============== */
+  .comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); }
+  @media (max-width: 900px) { .comp-grid { grid-template-columns: 1fr; } }
+  .comp {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    padding: var(--space-6);
+  }
+  .comp-label {
+    font-family: var(--font-eyebrow); font-size: var(--text-3xs); font-weight: 600;
+    letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--fg-muted);
+    margin-bottom: var(--space-5);
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+    font-family: var(--font-eyebrow); font-weight: 600; font-size: var(--text-2xs);
+    letter-spacing: var(--tracking-wider); text-transform: uppercase;
+    padding: 14px 28px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all var(--duration-base) var(--ease-standard);
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+  }
+  .btn-primary { background: var(--color-forest); color: var(--color-ivory); }
+  .btn-primary:hover { background: #2a4f3c; }
+  .btn-gold { background: var(--color-gold); color: var(--color-forest); }
+  .btn-gold:hover { background: #b8902f; }
+  .btn-ghost { background: transparent; color: var(--color-forest); border-color: var(--color-forest); }
+  .btn-ghost:hover { background: var(--color-forest); color: var(--color-ivory); }
+  .btn-link { background: transparent; color: var(--color-gold); padding: 14px 0; border-bottom: 1px solid var(--color-gold); border-radius: 0; }
+
+  .btn-row { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+
+  /* Tags */
+  .tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--font-eyebrow); font-weight: 600; font-size: var(--text-3xs);
+    text-transform: uppercase; letter-spacing: var(--tracking-wider);
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+  }
+  .tag-sage { background: rgba(140, 162, 138, 0.25); color: #4f6d4d; }
+  .tag-gold { background: transparent; color: var(--color-gold); border: 1px solid var(--color-gold); }
+  .tag-forest { background: var(--color-forest); color: var(--color-ivory); }
+  .tag-sand { background: var(--color-sand); color: var(--color-forest); }
+
+  /* Form */
+  .field { margin-bottom: var(--space-5); }
+  .field label {
+    display: block;
+    font-family: var(--font-eyebrow); font-weight: 600; font-size: var(--text-3xs);
+    letter-spacing: var(--tracking-wider); text-transform: uppercase;
+    color: var(--color-forest);
+    margin-bottom: 6px;
+  }
+  .field input {
+    width: 100%; border: none; border-bottom: 1px solid var(--border-strong);
+    background: transparent;
+    padding: 10px 0;
+    font-family: var(--font-body); font-size: var(--text-base);
+    color: var(--fg-primary);
+    outline: none;
+    transition: border-color var(--duration-base) var(--ease-standard);
+  }
+  .field input:focus { border-color: var(--color-gold); }
+  .field input::placeholder { color: var(--fg-muted); font-style: italic; }
+
+  /* Card */
+  .trip-card {
+    background: var(--bg-page);
+    border: 1px solid var(--border-subtle);
+    overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .trip-card .img {
+    aspect-ratio: 16/9;
+    background:
+      repeating-linear-gradient(135deg, rgba(31,61,46,0.06) 0 1px, transparent 1px 12px),
+      linear-gradient(180deg, var(--color-sage), var(--color-forest));
+    display: flex; align-items: flex-end; padding: var(--space-4);
+  }
+  .trip-card .img .place {
+    font-family: var(--font-eyebrow); font-size: var(--text-3xs); font-weight: 600;
+    letter-spacing: var(--tracking-wider); text-transform: uppercase;
+    color: var(--color-ivory); opacity: 0.9;
+  }
+  .trip-card .body { padding: var(--space-5); }
+  .trip-card .eyebrow { color: var(--color-gold); margin-bottom: var(--space-2); }
+  .trip-card h4 {
+    font-family: var(--font-display); font-weight: 700; font-size: var(--text-lg);
+    line-height: 1.15; color: var(--color-forest); margin: 0 0 var(--space-3);
+  }
+  .trip-card p {
+    font-family: var(--font-body); font-size: var(--text-sm); color: var(--fg-secondary);
+    margin: 0 0 var(--space-4); line-height: 1.55;
+  }
+  .trip-card .meta-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: var(--space-3); border-top: 1px solid var(--border-subtle);
+    font-family: var(--font-mono); font-size: var(--text-xs); color: var(--fg-muted);
+  }
+
+  /* ============== ORNAMENT ============== */
+  .ornament {
+    display: flex; align-items: center; justify-content: center; gap: var(--space-3);
+    margin: var(--space-7) 0;
+    color: var(--color-gold);
+  }
+  .ornament .line { flex: 1; max-width: 200px; height: 1px; background: var(--color-gold); opacity: 0.4; }
+  .ornament svg { width: 18px; height: 18px; }
+
+  /* ============== IMAGERY ============== */
+  .imagery-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--space-3); }
+  @media (max-width: 900px) { .imagery-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 480px) { .imagery-grid { grid-template-columns: repeat(2, 1fr); } }
+  .imagery-tile {
+    aspect-ratio: 3/4;
+    border: 1px solid var(--border-subtle);
+    background: var(--color-sand);
+    display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+    padding: var(--space-3);
+    position: relative;
+    overflow: hidden;
+  }
+  .imagery-tile::before {
+    content: ""; position: absolute; inset: 0;
+    background: repeating-linear-gradient(135deg, rgba(31,61,46,0.05) 0 1px, transparent 1px 8px);
+    pointer-events: none;
+  }
+  .imagery-tile .ph {
+    font-family: var(--font-mono); font-size: 10px; color: var(--fg-muted);
+    text-transform: lowercase; text-align: center; line-height: 1.4;
+    margin-bottom: auto; margin-top: 30%;
+  }
+  .imagery-tile .cap {
+    font-family: var(--font-eyebrow); font-weight: 600; font-size: var(--text-3xs);
+    letter-spacing: var(--tracking-wider); text-transform: uppercase;
+    color: var(--color-forest);
+    z-index: 1;
+  }
+  .imagery-tile.tone-forest { background: var(--color-forest); }
+  .imagery-tile.tone-forest .ph, .imagery-tile.tone-forest .cap { color: var(--color-sand); }
+  .imagery-tile.tone-navy { background: var(--color-navy); }
+  .imagery-tile.tone-navy .ph, .imagery-tile.tone-navy .cap { color: var(--color-sand); }
+  .imagery-tile.tone-gold { background: var(--color-gold); }
+  .imagery-tile.tone-gold .ph, .imagery-tile.tone-gold .cap { color: var(--color-forest); }
+
+  /* ============== DOWNLOADS ============== */
+  .downloads { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); }
+  @media (max-width: 900px) { .downloads { grid-template-columns: 1fr; } }
+  .dl-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    padding: var(--space-5);
+    display: flex; flex-direction: column; gap: var(--space-3);
+    text-decoration: none; color: inherit;
+    transition: all var(--duration-base) var(--ease-standard);
+  }
+  .dl-card:hover {
+    border-color: var(--color-gold);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+  .dl-card .kind {
+    font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-gold);
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .dl-card .name {
+    font-family: var(--font-display); font-weight: 700; font-size: var(--text-md);
+    color: var(--color-forest); line-height: 1.15;
+  }
+  .dl-card .desc {
+    font-family: var(--font-body); font-size: var(--text-sm); color: var(--fg-secondary);
+    line-height: 1.5;
+  }
+  .dl-card .arrow {
+    margin-top: auto;
+    font-family: var(--font-eyebrow); font-weight: 600; font-size: var(--text-3xs);
+    text-transform: uppercase; letter-spacing: var(--tracking-wider);
+    color: var(--color-gold);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  /* ============== FOOTER ============== */
+  footer {
+    background: var(--color-forest); color: var(--color-ivory);
+    padding: var(--space-8) 0 var(--space-7);
+    margin-top: var(--space-9);
+  }
+  .footer-inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); align-items: center;
+  }
+  @media (max-width: 720px) { .footer-inner { grid-template-columns: 1fr; text-align: center; } }
+  footer .mark { display: flex; align-items: center; gap: var(--space-4); }
+  @media (max-width: 720px) { footer .mark { justify-content: center; } }
+  footer .mark img { width: 64px; height: 64px; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.95; }
+  footer .mark .name {
+    font-family: var(--font-display); font-weight: 700; font-size: var(--text-xl);
+    text-transform: uppercase; line-height: 1; letter-spacing: -0.01em;
+  }
+  footer .mark .name span { color: var(--color-gold); }
+  footer .mark .sub {
+    font-family: var(--font-eyebrow); font-size: var(--text-3xs); font-weight: 600;
+    letter-spacing: var(--tracking-wider); text-transform: uppercase;
+    color: var(--color-sand); margin-top: 4px;
+  }
+  footer .closing {
+    font-family: var(--font-display); font-style: italic; font-weight: 400;
+    font-size: var(--text-md); color: var(--color-sand);
+    text-align: right;
+  }
+  @media (max-width: 720px) { footer .closing { text-align: center; } }
+  footer .meta {
+    margin-top: var(--space-7);
+    border-top: 1px solid rgba(243,239,230,0.15);
+    padding-top: var(--space-4);
+    display: flex; justify-content: space-between;
+    font-family: var(--font-mono); font-size: var(--text-3xs); color: rgba(243,239,230,0.55);
+    text-transform: uppercase; letter-spacing: var(--tracking-wider);
+  }
+  @media (max-width: 720px) { footer .meta { flex-direction: column; gap: var(--space-2); text-align: center; } }
+</style>
+</head>
+<body>
+
+<!-- ============== TOP BAR ============== -->
+<header class="topbar">
+  <div class="container topbar-inner">
+    <div class="topbar-mark">
+      <img src="assets/logo-monogram.png" alt="" />
+      <span>The 19th Hole · Brand Kit</span>
+    </div>
+    <nav class="topbar-nav">
+      <a href="#identity">Identity</a>
+      <a href="#logos">Logos</a>
+      <a href="#color">Color</a>
+      <a href="#type">Type</a>
+      <a href="#voice">Voice</a>
+      <a href="#components">Components</a>
+      <a href="#downloads">Downloads</a>
+    </nav>
+    <div class="topbar-meta">v1.0 · Est. 2026</div>
+  </div>
+</header>
+
+<!-- ============== HERO ============== -->
+<section class="hero" id="identity">
+  <div class="container">
+    <img class="hero-monogram" src="assets/logo-monogram.png" alt="The 19th Hole monogram" />
+    <h1>The Brand<br/><span class="ital">Handbook</span></h1>
+    <p class="hero-sub lede" style="margin-left:auto;margin-right:auto;">
+      A complete identity system for The 19th Hole — Golf Trip Club. Logos, color, type, voice, and component patterns. Designed for handoff to Claude Code.
+    </p>
+    <div class="hero-rule">
+      <span>Lost Balls · Found Memories</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============== LOGOS ============== -->
+<section class="kit" id="logos">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="num">§ 01 — Marks</div>
+      </div>
+      <div>
+        <h2>The Logo System</h2>
+        <p>Three lockups, each with a clear job. Use the primary for hero placement, the badge for stamps and avatars, the monogram for icons and ornaments.</p>
+      </div>
+    </div>
+
+    <div class="logo-grid">
+      <div class="logo-card">
+        <div class="label">Primary</div>
+        <img src="assets/logo-primary.png" alt="Primary logo" />
+        <div class="caption">Wordmark · Hero use</div>
+      </div>
+      <div class="logo-card">
+        <div class="label">Secondary</div>
+        <img src="assets/logo-secondary.png" alt="Badge logo" />
+        <div class="caption">Badge · Stamps & merch</div>
+      </div>
+      <div class="logo-card">
+        <div class="label">Monogram</div>
+        <img src="assets/logo-monogram.png" alt="Monogram" />
+        <div class="caption">Icon · Favicons & accents</div>
+      </div>
+    </div>
+
+    <div class="logo-grid" style="margin-top: var(--space-5);">
+      <div class="logo-card dark">
+        <div class="label">On Forest</div>
+        <img src="assets/logo-monogram.png" alt="Monogram on dark" style="filter: brightness(0) invert(1); opacity: 0.92;" />
+        <div class="caption">Inverted treatment</div>
+      </div>
+      <div class="logo-card sand">
+        <div class="label">On Sand</div>
+        <img src="assets/logo-secondary.png" alt="Badge on sand" />
+        <div class="caption">Warm neutral surface</div>
+      </div>
+      <div class="logo-card">
+        <div class="label">Min Size</div>
+        <img src="assets/logo-monogram.png" alt="Min size" style="max-width: 32px; max-height: 32px;" />
+        <div class="caption">Monogram floor: 32px</div>
+      </div>
+    </div>
+
+    <div class="clearspace-demo">
+      <div class="clearspace-stage">
+        <img src="assets/logo-primary.png" alt="Clear-space demo" />
+      </div>
+      <div>
+        <div class="eyebrow" style="margin-bottom: var(--space-3);">Clear Space</div>
+        <h3 style="font-family: var(--font-display); font-weight: 700; margin: 0 0 var(--space-3); color: var(--color-forest); font-size: var(--text-lg);">Give it room to breathe.</h3>
+        <p style="margin: 0; color: var(--fg-secondary);">
+          Maintain padding equal to the cap-height of the &ldquo;T&rdquo; in &ldquo;THE&rdquo; on every side. Never crop into the flag's pole or the wordmark's descenders.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== COLOR ============== -->
+<section class="kit" id="color">
+  <div class="container">
+    <div class="section-head">
+      <div><div class="num">§ 02 — Color</div></div>
+      <div>
+        <h2>Palette &amp; Roles</h2>
+        <p>Six-color system anchored on forest green and ivory. Gold is an accent — never a flood. Sand and sage handle warmth; navy steps in for formal contexts.</p>
+      </div>
+    </div>
+
+    <div class="color-grid">
+      <div class="swatch">
+        <div class="chip" style="background: var(--color-forest);"><span class="var">--color-forest</span></div>
+        <div class="meta">
+          <div class="name">Forest</div>
+          <div class="hex">#1F3D2E</div>
+          <div class="role">Primary brand. Headlines, logo green.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background: var(--color-navy);"><span class="var">--color-navy</span></div>
+        <div class="meta">
+          <div class="name">Navy</div>
+          <div class="hex">#132B45</div>
+          <div class="role">Deep support. Footers, formal moments.</div>
+        </div>
+      </div>
+      <div class="swatch light">
+        <div class="chip" style="background: var(--color-sand);"><span class="var">--color-sand</span></div>
+        <div class="meta">
+          <div class="name">Sand</div>
+          <div class="hex">#D8C8A6</div>
+          <div class="role">Warm neutral. Inset cards, dividers.</div>
+        </div>
+      </div>
+      <div class="swatch light">
+        <div class="chip" style="background: var(--color-ivory); border-color: var(--border-strong);"><span class="var">--color-ivory</span></div>
+        <div class="meta">
+          <div class="name">Ivory</div>
+          <div class="hex">#F3EFE6</div>
+          <div class="role">Page background — the &ldquo;paper&rdquo;.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background: var(--color-gold);"><span class="var">--color-gold</span></div>
+        <div class="meta">
+          <div class="name">Gold</div>
+          <div class="hex">#CDA24E</div>
+          <div class="role">Accent. Rules, ornament, CTAs.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background: var(--color-sage);"><span class="var">--color-sage</span></div>
+        <div class="meta">
+          <div class="name">Sage</div>
+          <div class="hex">#8CA28A</div>
+          <div class="role">Soft secondary. Tags, muted UI.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ratio-bar" title="Recommended usage ratio">
+      <div style="background: var(--color-ivory); color: var(--color-forest); flex: 60;">Ivory · 60%</div>
+      <div style="background: var(--color-forest); color: var(--color-ivory); flex: 25;">Forest · 25%</div>
+      <div style="background: var(--color-sand); color: var(--color-forest); flex: 6;">Sand · 6%</div>
+      <div style="background: var(--color-sage); color: var(--color-forest); flex: 4;">Sage · 4%</div>
+      <div style="background: var(--color-gold); color: var(--color-forest); flex: 5;">Gold · 5%</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== TYPE ============== -->
+<section class="kit" id="type">
+  <div class="container">
+    <div class="section-head">
+      <div><div class="num">§ 03 — Type</div></div>
+      <div>
+        <h2>Typography</h2>
+        <p>A serif/sans pairing built for editorial calm. Playfair Display sets the headlines, Montserrat handles smallcaps and UI, and Lora carries longform.</p>
+      </div>
+    </div>
+
+    <div class="type-stack">
+      <div class="type-row">
+        <div class="meta">
+          <strong>Hero · Display</strong>
+          Playfair Display 900<br/>
+          76px / 0.95 / -0.025em<br/>
+          ALL CAPS
+        </div>
+        <div class="type-sample hero-display">Lost Balls.<br/>Found Memories.</div>
+      </div>
+      <div class="type-row">
+        <div class="meta">
+          <strong>Heading 1</strong>
+          Playfair Display 700<br/>
+          49px / 1.05 / -0.01em
+        </div>
+        <div class="type-sample h1">A tradition among friends</div>
+      </div>
+      <div class="type-row">
+        <div class="meta">
+          <strong>Heading 2</strong>
+          Playfair Display 700<br/>
+          39px / 1.1
+        </div>
+        <div class="type-sample h2">Any course. Any destination.</div>
+      </div>
+      <div class="type-row">
+        <div class="meta">
+          <strong>Eyebrow</strong>
+          Montserrat 600<br/>
+          12px / 0.16em tracking<br/>
+          ALL CAPS · Gold
+        </div>
+        <div class="type-sample eyebrow-sample">§ 04 — The Annual Trip</div>
+      </div>
+      <div class="type-row">
+        <div class="meta">
+          <strong>Body</strong>
+          Lora 400<br/>
+          18px / 1.6
+        </div>
+        <p class="type-sample body-sample">Once a year, the group reconvenes. Different course, different state, same cast. The trip is the constant — the rounds, the wagers, the long dinners, the old stories that get a little better every time someone tells them. Welcome to The 19th Hole.</p>
+      </div>
+      <div class="type-row">
+        <div class="meta">
+          <strong>Mono</strong>
+          JetBrains Mono 400<br/>
+          14px<br/>
+          UI: dates, scores, codes
+        </div>
+        <div class="type-sample mono-sample">2026.06.14 · PEBBLE BEACH · PAR 72 · +4</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== TAGLINES ============== -->
+<section class="kit" id="taglines">
+  <div class="container">
+    <div class="section-head">
+      <div><div class="num">§ 04 — Voice in One Line</div></div>
+      <div>
+        <h2>Taglines</h2>
+        <p>One primary, two supports. Primary leads on hero canvases; the others rotate in marketing rhythm or sit beside the badge mark.</p>
+      </div>
+    </div>
+
+    <div class="taglines">
+      <div class="tagline primary">
+        <div class="role">Primary</div>
+        <div class="line">Lost Balls.<br/>Found Memories.</div>
+      </div>
+      <div class="tagline secondary">
+        <div class="role">Secondary</div>
+        <div class="line">Good rounds.<br/>Great company.</div>
+      </div>
+      <div class="tagline tertiary">
+        <div class="role">Tertiary</div>
+        <div class="line">Any course.<br/>Every year.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== VOICE ============== -->
+<section class="kit" id="voice">
+  <div class="container">
+    <div class="section-head">
+      <div><div class="num">§ 05 — Voice &amp; Tone</div></div>
+      <div>
+        <h2>How we sound</h2>
+        <p>Write like a witty member toasting the table. Short, declarative, evocative — never like a brochure.</p>
+      </div>
+    </div>
+
+    <div class="voice">
+      <div class="voice-col do">
+        <h3><span class="badge">✓</span> Do</h3>
+        <ul>
+          <li>Short, two-beat phrases. &ldquo;Tee at dawn. Toast at dusk.&rdquo;</li>
+          <li>Specific verbs: chase, toast, found, gather, return.</li>
+          <li>Dry humor. Self-deprecating about the score, sincere about the company.</li>
+          <li>Member-first language: &ldquo;the group,&rdquo; &ldquo;the trip,&rdquo; &ldquo;our table.&rdquo;</li>
+        </ul>
+      </div>
+      <div class="voice-col dont">
+        <h3><span class="badge">×</span> Don't</h3>
+        <ul>
+          <li>Corporate hype: &ldquo;world-class,&rdquo; &ldquo;unparalleled,&rdquo; &ldquo;next-level.&rdquo;</li>
+          <li>Exclamation points or emoji.</li>
+          <li>Aggressive sportiness: &ldquo;crush it,&rdquo; &ldquo;dominate,&rdquo; &ldquo;send it.&rdquo;</li>
+          <li>Over-explaining. If a line needs a footnote, cut it.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div class="ornament">
+    <span class="line"></span>
+    <svg viewBox="0 0 24 24" fill="none">
+      <path d="M8 22 L8 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+      <path d="M8 4 Q14 5 18 7 Q14 9 8 10 Z" fill="currentColor"/>
+      <circle cx="8" cy="3" r="1.2" fill="currentColor"/>
+    </svg>
+    <span class="line"></span>
+  </div>
+</div>
+
+<!-- ============== COMPONENTS ============== -->
+<section class="kit" id="components">
+  <div class="container">
+    <div class="section-head">
+      <div><div class="num">§ 06 — Components</div></div>
+      <div>
+        <h2>Component patterns</h2>
+        <p>The atoms that show up across product, marketing, and merch. Reference these when building new screens — match the spacing, weight, and ornament rhythm shown here.</p>
+      </div>
+    </div>
+
+    <div class="comp-grid">
+      <div class="comp">
+        <div class="comp-label">Buttons</div>
+        <div class="btn-row">
+          <button class="btn btn-primary">Book the trip</button>
+          <button class="btn btn-gold">Reserve a tee time</button>
+          <button class="btn btn-ghost">View itinerary</button>
+          <a href="#" class="btn btn-link">See past trips →</a>
+        </div>
+      </div>
+
+      <div class="comp">
+        <div class="comp-label">Tags &amp; Badges</div>
+        <div class="btn-row">
+          <span class="tag tag-forest">Members Only</span>
+          <span class="tag tag-gold">Annual Trip</span>
+          <span class="tag tag-sage">Coastal</span>
+          <span class="tag tag-sand">Par 72</span>
+        </div>
+        <div class="btn-row" style="margin-top: var(--space-4);">
+          <span class="tag tag-sage">★ Rolling Hills</span>
+          <span class="tag tag-gold">★ Founders' Cup</span>
+        </div>
+      </div>
+
+      <div class="comp">
+        <div class="comp-label">Form Inputs</div>
+        <div class="field">
+          <label for="f1">Member Name</label>
+          <input id="f1" type="text" placeholder="As it appears on the bag tag" />
+        </div>
+        <div class="field">
+          <label for="f2">Handicap (optional)</label>
+          <input id="f2" type="text" placeholder="Be honest, ish" />
+        </div>
+        <button class="btn btn-primary" style="margin-top: var(--space-2);">Submit Entry</button>
+      </div>
+
+      <div class="comp" style="padding: 0; overflow: hidden; background: transparent; border: none;">
+        <div class="trip-card">
+          <div class="img"><span class="place">Pebble Beach · CA</span></div>
+          <div class="body">
+            <div class="eyebrow">June 2026 · Trip 03</div>
+            <h4>The Coast Run</h4>
+            <p>Three days of links-style golf along the Monterey peninsula. Whiskey at the clubhouse. Stories at the table.</p>
+            <div class="meta-row">
+              <span>2026.06.14 → 06.16</span>
+              <span style="color: var(--color-gold);">8 / 12 SEATS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== IMAGERY ============== -->
+<section class="kit" id="imagery">
+  <div class="container">
+    <div class="section-head">
+      <div><div class="num">§ 07 — Imagery</div></div>
+      <div>
+        <h2>Photography direction</h2>
+        <p>Warm, slightly desaturated, film-grain feel. Coastal courses at golden hour. Vintage gear. Friends mid-laugh. Whiskey on the rocks. Never glossy stock.</p>
+      </div>
+    </div>
+
+    <div class="imagery-grid">
+      <div class="imagery-tile"><div class="ph">[ photo ]<br/>coastal<br/>course</div><div class="cap">Epic Courses</div></div>
+      <div class="imagery-tile tone-forest"><div class="ph">[ photo ]<br/>vintage<br/>bag</div><div class="cap">Good Gear</div></div>
+      <div class="imagery-tile"><div class="ph">[ photo ]<br/>group<br/>laughing</div><div class="cap">Great Company</div></div>
+      <div class="imagery-tile tone-navy"><div class="ph">[ photo ]<br/>whiskey<br/>pour</div><div class="cap">Toast The Round</div></div>
+      <div class="imagery-tile tone-gold"><div class="ph">[ photo ]<br/>weathered<br/>duffel</div><div class="cap">Trip Essentials</div></div>
+      <div class="imagery-tile"><div class="ph">[ photo ]<br/>flag<br/>at sunset</div><div class="cap">Chase Better</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== DOWNLOADS ============== -->
+<section class="kit" id="downloads">
+  <div class="container">
+    <div class="section-head">
+      <div><div class="num">§ 08 — Handoff</div></div>
+      <div>
+        <h2>For Claude Code</h2>
+        <p>Drop these files into your project root. Reference <span class="mono" style="color: var(--color-forest);">tokens.css</span> in your app entry; treat <span class="mono" style="color: var(--color-forest);">BRAND.md</span> as the source of truth for voice and component patterns.</p>
+      </div>
+    </div>
+
+    <div class="downloads">
+      <a class="dl-card" href="tokens.css" download>
+        <div class="kind">[ tokens.css ]</div>
+        <div class="name">Design Tokens</div>
+        <div class="desc">CSS custom properties for color, type, spacing, radii, shadows, and motion. Single source of truth.</div>
+        <div class="arrow"><span>Download</span><span>↓</span></div>
+      </a>
+      <a class="dl-card" href="BRAND.md" download>
+        <div class="kind">[ BRAND.md ]</div>
+        <div class="name">Brand Handbook</div>
+        <div class="desc">Voice, tone, logo rules, typography hierarchy, and Claude Code instructions in plain markdown.</div>
+        <div class="arrow"><span>Download</span><span>↓</span></div>
+      </a>
+      <a class="dl-card" href="assets/logo-primary.png" download>
+        <div class="kind">[ /assets ]</div>
+        <div class="name">Logo Suite</div>
+        <div class="desc">Three lockups — primary, badge, monogram — at full resolution. PNG with transparent context.</div>
+        <div class="arrow"><span>Browse files</span><span>↓</span></div>
+      </a>
+    </div>
+
+    <div style="margin-top: var(--space-7); background: var(--color-forest); color: var(--color-ivory); padding: var(--space-6); border-left: 4px solid var(--color-gold);">
+      <div class="eyebrow" style="color: var(--color-gold); margin-bottom: var(--space-3);">Prompt Snippet for Claude Code</div>
+      <pre style="margin: 0; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-sand); white-space: pre-wrap; line-height: 1.6;">Use the brand kit at /BRAND.md and the tokens at /tokens.css.
+Reference all colors, type, and spacing through CSS custom
+properties (e.g. var(--color-forest), var(--text-xl)).
+Never hardcode hex values. Match the voice samples in BRAND.md
+for any user-facing copy. Logos live in /assets/.</pre>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="mark">
+        <img src="assets/logo-monogram.png" alt="" />
+        <div>
+          <div class="name">The <span>19th</span> Hole</div>
+          <div class="sub">Golf Trip Club · Est. 2026</div>
+        </div>
+      </div>
+      <div class="closing">&ldquo;Good rounds. Great company.&rdquo;</div>
+    </div>
+    <div class="meta">
+      <span>Brand Kit v1.0 · 2026</span>
+      <span>Lost Balls · Found Memories</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
