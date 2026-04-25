@@ -272,7 +272,7 @@ select {
   color: var(--fg-primary);
   background: transparent;
   border: none;
-  border-bottom: 1px solid var(--border-strong);
+  border-bottom: 0.5px solid var(--border-strong);
   outline: none;
   transition: border-color var(--duration-base) var(--ease-standard);
 }

@@ -3,8 +3,8 @@ import Image from "next/image";
 export function Footer() {
   return (
     <footer
-      className="relative z-1 border-t py-12"
-      style={{ borderColor: "var(--border-subtle)", background: "var(--bg-page)" }}
+      className="relative z-1 border-t py-16"
+      style={{ borderColor: "var(--border-subtle)", background: "var(--bg-page)", borderTopWidth: "0.5px" }}
     >
       <div className="container-base text-center">
         <Image

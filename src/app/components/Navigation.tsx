@@ -24,7 +24,7 @@ export function Navigation() {
   return (
     <header
       className="relative z-10 border-b"
-      style={{ borderColor: "var(--border-subtle)", background: "var(--bg-page)" }}
+      style={{ borderColor: "var(--border-subtle)", background: "var(--bg-page)", borderBottomWidth: "0.5px" }}
     >
       <div className="container-wide">
         <div className="flex items-center justify-between py-4">

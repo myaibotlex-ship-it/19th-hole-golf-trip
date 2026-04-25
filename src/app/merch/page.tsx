@@ -138,7 +138,7 @@ export default function MerchPage() {
                 </div>
 
                 {/* Price + CTA */}
-                <div className="flex items-center justify-between mt-auto pt-3" style={{ borderTop: "1px solid var(--border-subtle)" }}>
+                <div className="flex items-center justify-between mt-auto pt-4" style={{ borderTop: "0.5px solid var(--border-subtle)" }}>
                   <span
                     className="font-[family-name:var(--font-display)] font-bold text-[length:var(--text-lg)]"
                     style={{ color: "var(--fg-primary)" }}
