@@ -63,8 +63,12 @@ export default function Home() {
             The 19th<br />
             <span className="italic font-bold">Hole</span>
           </h1>
-          <div className="gold-rule-ornament mb-8" style={{ color: "var(--accent)", fontSize: "var(--text-sm)" }}>
-            &#9873;
+          <div className="gold-rule-ornament mb-8" style={{ color: "var(--accent)" }}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M8 22 L8 4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+              <path d="M8 4 Q14 5 18 7 Q14 9 8 10 Z" fill="currentColor" />
+              <circle cx="8" cy="3" r="1.2" fill="currentColor" />
+            </svg>
           </div>
           <p
             className="font-[family-name:var(--font-body)] text-[length:var(--text-md)] leading-[1.7] max-w-[56ch] mx-auto"
@@ -107,7 +111,13 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {highlights.map((h) => (
               <div key={h.title} className="card text-center">
-                <div style={{ color: "var(--accent)", fontSize: "var(--text-md)", marginBottom: "var(--space-4)" }}>&#9873;</div>
+                <div style={{ color: "var(--accent)", marginBottom: "var(--space-4)" }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M8 22 L8 4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+                    <path d="M8 4 Q14 5 18 7 Q14 9 8 10 Z" fill="currentColor" />
+                    <circle cx="8" cy="3" r="1.2" fill="currentColor" />
+                  </svg>
+                </div>
                 <h3
                   className="font-[family-name:var(--font-display)] font-bold text-[length:var(--text-lg)] mb-3"
                   style={{ color: "var(--fg-primary)" }}

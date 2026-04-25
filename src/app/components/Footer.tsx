@@ -3,29 +3,72 @@ import Image from "next/image";
 export function Footer() {
   return (
     <footer
-      className="relative z-1 border-t py-16"
-      style={{ borderColor: "var(--border-subtle)", background: "var(--bg-page)", borderTopWidth: "0.5px" }}
+      className="relative z-1"
+      style={{ background: "var(--color-forest)", color: "var(--color-ivory)" }}
     >
-      <div className="container-base text-center">
-        <Image
-          src="/assets/assets/logo-secondary.png"
-          alt="The 19th Hole badge"
-          width={80}
-          height={80}
-          className="mx-auto mb-4 object-contain opacity-70"
-        />
-        <p
-          className="font-[family-name:var(--font-display)] italic text-[length:var(--text-md)] mb-2"
-          style={{ color: "var(--fg-secondary)" }}
+      <div className="container-base" style={{ padding: "var(--space-8) var(--space-5) var(--space-7)" }}>
+        {/* Two-column: mark + closing quote */}
+        <div
+          className="grid gap-6 items-center"
+          style={{ gridTemplateColumns: "1fr 1fr" }}
         >
-          Lost Balls. Found Memories.
-        </p>
-        <p
-          className="font-[family-name:var(--font-eyebrow)] uppercase tracking-[0.16em] text-[length:var(--text-3xs)]"
-          style={{ color: "var(--fg-muted)" }}
+          <div className="flex items-center gap-4">
+            <Image
+              src="/assets/assets/logo-monogram.png"
+              alt="The 19th Hole monogram"
+              width={64}
+              height={64}
+              className="object-contain flex-shrink-0"
+              style={{ filter: "brightness(0) invert(1)", opacity: 0.95 }}
+            />
+            <div>
+              <div
+                className="font-[family-name:var(--font-display)] font-bold uppercase leading-none"
+                style={{
+                  fontSize: "var(--text-xl)",
+                  letterSpacing: "-0.01em",
+                  color: "var(--color-ivory)",
+                }}
+              >
+                The{" "}
+                <span style={{ color: "var(--color-gold)" }}>19th</span>{" "}
+                Hole
+              </div>
+              <div
+                className="font-[family-name:var(--font-eyebrow)] font-semibold uppercase mt-1"
+                style={{
+                  fontSize: "var(--text-3xs)",
+                  letterSpacing: "var(--tracking-wider)",
+                  color: "var(--color-sand)",
+                }}
+              >
+                Golf Trip Club &middot; Est. 2026
+              </div>
+            </div>
+          </div>
+
+          <p
+            className="font-[family-name:var(--font-display)] italic text-right"
+            style={{ fontSize: "var(--text-md)", color: "var(--color-sand)", fontWeight: 400 }}
+          >
+            &ldquo;Good rounds. Great company.&rdquo;
+          </p>
+        </div>
+
+        {/* Meta row */}
+        <div
+          className="flex justify-between mt-7 pt-4 uppercase"
+          style={{
+            borderTop: "1px solid rgba(243, 239, 230, 0.15)",
+            fontFamily: "var(--font-mono)",
+            fontSize: "var(--text-3xs)",
+            color: "rgba(243, 239, 230, 0.55)",
+            letterSpacing: "var(--tracking-wider)",
+          }}
         >
-          The 19th Hole &middot; Golf Trip Club &middot; Est. 2026
-        </p>
+          <span>The 19th Hole &middot; 2026</span>
+          <span>Lost Balls &middot; Found Memories</span>
+        </div>
       </div>
     </footer>
   );

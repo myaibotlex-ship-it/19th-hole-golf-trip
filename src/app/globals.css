@@ -165,7 +165,19 @@ body {
               color var(--duration-base) var(--ease-standard);
 }
 
-/* No texture — clean ivory surface */
+/* Subtle paper texture — brand kit §01 */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(rgba(31, 61, 46, 0.025) 1px, transparent 1px),
+    radial-gradient(rgba(31, 61, 46, 0.018) 1px, transparent 1px);
+  background-size: 3px 3px, 7px 7px;
+  background-position: 0 0, 1px 2px;
+  z-index: 0;
+}
 
 /* ===== UTILITY CLASSES ===== */
 .eyebrow {
@@ -193,11 +205,11 @@ body {
 .gold-rule-ornament::before,
 .gold-rule-ornament::after {
   content: "";
-  height: 0.5px;
+  height: 1px;
   flex: 1;
-  max-width: 120px;
+  max-width: 200px;
   background: var(--accent);
-  opacity: 0.35;
+  opacity: 0.4;
 }
 
 /* Card component */
@@ -227,12 +239,36 @@ body {
   text-transform: uppercase;
   letter-spacing: var(--tracking-wider);
   border: none;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all var(--duration-base) var(--ease-standard);
 }
 
 .btn-primary:hover {
-  background: var(--color-navy);
+  background: #2a4f3c;
+}
+
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  background: var(--color-gold);
+  color: var(--fg-on-gold);
+  font-family: var(--font-eyebrow), sans-serif;
+  font-weight: 600;
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--duration-base) var(--ease-standard);
+}
+
+.btn-gold:hover {
+  background: #b8902f;
 }
 
 .btn-ghost {
@@ -242,20 +278,41 @@ body {
   gap: var(--space-2);
   padding: var(--space-3) var(--space-5);
   background: transparent;
-  color: var(--accent);
+  color: var(--color-forest);
   font-family: var(--font-eyebrow), sans-serif;
   font-weight: 600;
   font-size: var(--text-2xs);
   text-transform: uppercase;
   letter-spacing: var(--tracking-wider);
-  border: 1px solid var(--accent);
+  border: 1px solid var(--color-forest);
+  border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all var(--duration-base) var(--ease-standard);
 }
 
 .btn-ghost:hover {
-  background: var(--accent);
-  color: var(--fg-on-gold);
+  background: var(--color-forest);
+  color: var(--fg-on-dark);
+}
+
+.btn-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) 0;
+  background: transparent;
+  color: var(--color-gold);
+  font-family: var(--font-eyebrow), sans-serif;
+  font-weight: 600;
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  border: none;
+  border-bottom: 1px solid var(--color-gold);
+  border-radius: 0;
+  cursor: pointer;
+  transition: all var(--duration-base) var(--ease-standard);
+  text-decoration: none;
 }
 
 /* Form inputs */
@@ -289,7 +346,7 @@ label {
   font-size: var(--text-3xs);
   text-transform: uppercase;
   letter-spacing: var(--tracking-wider);
-  color: var(--fg-muted);
+  color: var(--color-forest);
 }
 
 /* Table styles */
@@ -364,12 +421,22 @@ label {
 }
 
 .tag-sage {
-  background: var(--color-sage);
-  color: white;
+  background: rgba(140, 162, 138, 0.25);
+  color: #4f6d4d;
 }
 
 .tag-gold {
   background: transparent;
   border: 1px solid var(--accent);
   color: var(--accent);
+}
+
+.tag-forest {
+  background: var(--color-forest);
+  color: var(--color-ivory);
+}
+
+.tag-sand {
+  background: var(--color-sand);
+  color: var(--color-forest);
 }
