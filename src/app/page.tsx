@@ -1,65 +1,162 @@
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+
+const TRIP_DATE = new Date("2026-07-16T08:00:00");
+
+function useCountdown(target: Date) {
+  const [now, setNow] = useState<Date | null>(null);
+  useEffect(() => {
+    setNow(new Date());
+    const id = setInterval(() => setNow(new Date()), 1000);
+    return () => clearInterval(id);
+  }, []);
+  if (!now) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+  const diff = Math.max(0, target.getTime() - now.getTime());
+  return {
+    days: Math.floor(diff / 86400000),
+    hours: Math.floor((diff % 86400000) / 3600000),
+    minutes: Math.floor((diff % 3600000) / 60000),
+    seconds: Math.floor((diff % 60000) / 1000),
+  };
+}
+
+function CountdownUnit({ value, label }: { value: number; label: string }) {
+  return (
+    <div className="text-center">
+      <div
+        className="font-[family-name:var(--font-display)] font-black text-[length:var(--text-4xl)] md:text-[length:var(--text-5xl)] leading-none"
+        style={{ color: "var(--fg-primary)" }}
+      >
+        {String(value).padStart(2, "0")}
+      </div>
+      <div className="eyebrow mt-2">{label}</div>
+    </div>
+  );
+}
+
+const highlights = [
+  { icon: "⛳", title: "3 Rounds", desc: "Championship courses along the coast" },
+  { icon: "🏨", title: "4 Nights", desc: "Luxury lodging, two to a suite" },
+  { icon: "🥃", title: "19th Hole", desc: "Nightly gatherings. Stories optional." },
+  { icon: "🏆", title: "The Cup", desc: "Bragging rights for the year" },
+];
 
 export default function Home() {
+  const countdown = useCountdown(TRIP_DATE);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <>
+      {/* Hero */}
+      <section className="relative z-1 py-16 md:py-24 text-center">
+        <div className="container-base">
+          <Image
+            src="/assets/assets/logo-monogram.png"
+            alt="The 19th Hole monogram"
+            width={120}
+            height={120}
+            className="mx-auto mb-6 object-contain"
+            priority
+          />
+          <h1
+            className="font-[family-name:var(--font-display)] font-black uppercase leading-[0.95] tracking-[-0.025em] mb-6"
+            style={{
+              fontSize: "clamp(2.8rem, 8vw, 5.5rem)",
+              color: "var(--fg-primary)",
+            }}
+          >
+            The 19th<br />
+            <span className="italic font-bold">Hole</span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p
+            className="font-[family-name:var(--font-body)] text-[length:var(--text-md)] leading-[1.7] max-w-[56ch] mx-auto mb-8"
+            style={{ color: "var(--fg-secondary)" }}
+          >
+            A tradition among friends. Stories that last a lifetime.
+          </p>
+          <div className="gold-rule-ornament eyebrow mb-0">Est. 2026</div>
+        </div>
+      </section>
+
+      {/* Countdown */}
+      <section className="section">
+        <div className="container-base">
+          <p className="eyebrow text-center mb-6">Tee Time Countdown</p>
+          <div className="flex justify-center gap-8 md:gap-16 mb-8">
+            <CountdownUnit value={countdown.days} label="Days" />
+            <CountdownUnit value={countdown.hours} label="Hours" />
+            <CountdownUnit value={countdown.minutes} label="Min" />
+            <CountdownUnit value={countdown.seconds} label="Sec" />
+          </div>
+          <p
+            className="text-center font-[family-name:var(--font-eyebrow)] text-[length:var(--text-2xs)] uppercase tracking-[0.16em]"
+            style={{ color: "var(--fg-muted)" }}
+          >
+            July 16 &ndash; 20, 2026 &middot; Bandon Dunes, Oregon
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      </section>
+
+      {/* Highlights */}
+      <section className="section">
+        <div className="container-base">
+          <p className="eyebrow text-center mb-2">The Trip</p>
+          <h2
+            className="font-[family-name:var(--font-display)] font-bold text-[length:var(--text-2xl)] text-center mb-10 leading-[1.1]"
+            style={{ color: "var(--fg-primary)" }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            Good rounds. Great company.
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {highlights.map((h) => (
+              <div key={h.title} className="card text-center">
+                <div className="text-4xl mb-3">{h.icon}</div>
+                <h3
+                  className="font-[family-name:var(--font-display)] font-bold text-[length:var(--text-lg)] mb-2"
+                  style={{ color: "var(--fg-primary)" }}
+                >
+                  {h.title}
+                </h3>
+                <p
+                  className="font-[family-name:var(--font-body)] text-[length:var(--text-sm)]"
+                  style={{ color: "var(--fg-secondary)" }}
+                >
+                  {h.desc}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* Tagline + CTA */}
+      <section className="section">
+        <div className="container-narrow text-center">
+          <Image
+            src="/assets/assets/logo-primary.png"
+            alt="The 19th Hole primary logo"
+            width={240}
+            height={120}
+            className="mx-auto mb-8 object-contain"
+          />
+          <p
+            className="font-[family-name:var(--font-display)] italic text-[length:var(--text-xl)] md:text-[length:var(--text-2xl)] leading-[1.25] mb-8"
+            style={{ color: "var(--fg-primary)" }}
+          >
+            &ldquo;Lost Balls. Found Memories.&rdquo;
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/rsvp" className="btn-primary no-underline">
+              RSVP Now
+            </Link>
+            <Link href="/itinerary" className="btn-ghost no-underline">
+              View Itinerary
+            </Link>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
