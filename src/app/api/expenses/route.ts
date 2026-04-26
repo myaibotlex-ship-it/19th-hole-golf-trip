@@ -5,23 +5,41 @@ import { computeBalances, computeSettlements, type Expense } from "@/lib/finance
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
   const userSlug = request.cookies.get("gh19_user")?.value;
+  console.log("[expenses] GET request received, gh19_user:", userSlug ?? "(missing)");
+
   if (!isValidSlug(userSlug)) {
     return NextResponse.json({ ok: false, error: "Unauthorized" }, { status: 401 });
   }
 
-  const db = createAdminClient();
-  const { data, error } = await db
-    .from("expenses")
-    .select("*")
-    .order("date", { ascending: false })
-    .order("created_at", { ascending: false });
+  let data, error;
+  try {
+    const db = createAdminClient();
+    ({ data, error } = await db
+      .from("expenses")
+      .select("*")
+      .order("date", { ascending: false })
+      .order("created_at", { ascending: false }));
+  } catch (thrown) {
+    const err = thrown as Error;
+    console.error("[expenses GET] thrown exception:", {
+      name: err?.name,
+      message: err?.message,
+      stack: err?.stack,
+    });
+    return NextResponse.json({ ok: false, error: "Failed to fetch expenses" }, { status: 500 });
+  }
 
   if (error) {
     // Table not yet created — return empty state rather than crashing
     if (error.code === "42P01") {
       return NextResponse.json({ ok: true, expenses: [], balances: [], settlements: [] });
     }
-    console.error("[expenses GET]", error);
+    console.error("[expenses GET] supabase error:", {
+      message: error.message,
+      code: error.code,
+      details: error.details,
+      hint: error.hint,
+    });
     return NextResponse.json({ ok: false, error: "Failed to fetch expenses" }, { status: 500 });
   }
 
