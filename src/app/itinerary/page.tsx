@@ -18,7 +18,7 @@ type DaySchedule = {
 const lodging = [
   {
     name: "Black Desert Resort",
-    location: "Ivins, UT",
+    location: "St. George, UT",
     checkin: "Wed Jun 3",
     checkout: "Thu Jun 4",
     nights: "1 night",
@@ -27,7 +27,7 @@ const lodging = [
   },
   {
     name: "House Rental",
-    location: "Ivins / St. George, UT",
+    location: "St. George, UT",
     checkin: "Wed Jun 3",
     checkout: "Sat Jun 6",
     nights: "3 nights",
@@ -120,7 +120,7 @@ export default function ItineraryPage() {
       <PageHeader
         eyebrow="June 3–7, 2026"
         title="Itinerary"
-        subtitle="Six rounds across four days. Ivins, St. George, Hurricane — Utah desert golf."
+        subtitle="Six rounds across four days. St. George, Utah."
       />
 
       {/* Lodging */}

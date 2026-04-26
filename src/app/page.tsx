@@ -67,7 +67,7 @@ export default function Home() {
       >
         <Image
           src="/images/hero-black-desert.jpg"
-          alt="Black Desert Golf Course, Ivins, Utah"
+          alt="Black Desert Golf Course, Utah"
           fill
           style={{ objectFit: "cover", objectPosition: "center" }}
           priority
@@ -96,7 +96,7 @@ export default function Home() {
               marginBottom: "var(--space-4)",
             }}
           >
-            EST. 2026 &middot; IVINS &middot; ST. GEORGE &middot; HURRICANE, UT
+            EST. 2026 &middot; ST. GEORGE, UT
           </p>
 
           <h1
@@ -229,7 +229,7 @@ export default function Home() {
             className="text-center font-[family-name:var(--font-eyebrow)] text-[length:var(--text-2xs)] uppercase tracking-[0.16em]"
             style={{ color: "var(--fg-muted)" }}
           >
-            June 3&ndash;7, 2026 &middot; Ivins / St. George, Utah
+            June 3&ndash;7, 2026 &middot; St. George, Utah
           </p>
         </div>
       </section>
