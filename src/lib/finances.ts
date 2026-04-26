@@ -38,11 +38,18 @@ export function computeBalances(expenses: Expense[]): Balance[] {
     }
   }
 
-  return ATTENDEES.map((a) => ({
+  const result = ATTENDEES.map((a) => ({
     slug: a.slug,
     fullName: a.fullName,
     net: Math.round((nets.get(a.slug) ?? 0) * 100) / 100,
   }));
+
+  const totalNet = result.reduce((sum, b) => sum + b.net, 0);
+  if (Math.abs(totalNet) > 0.05) {
+    console.warn(`[finances] Balances do not sum to zero: ${totalNet.toFixed(2)}`);
+  }
+
+  return result;
 }
 
 export function computeSettlements(balances: Balance[]): Settlement[] {
