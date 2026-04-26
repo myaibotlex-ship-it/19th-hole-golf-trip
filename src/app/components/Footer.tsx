@@ -1,6 +1,12 @@
 import Image from "next/image";
+import { cookies } from "next/headers";
+import { getAttendee } from "@/lib/attendees";
 
-export function Footer() {
+export async function Footer() {
+  const cookieStore = await cookies();
+  const userSlug = cookieStore.get("gh19_user")?.value;
+  const attendee = userSlug ? getAttendee(userSlug) : undefined;
+
   return (
     <footer
       className="relative z-1"
@@ -68,9 +74,24 @@ export function Footer() {
         >
           <span>The 19th Hole &middot; 2026</span>
           <span>Lost Balls &middot; Found Memories</span>
-          <a href="/api/logout" className="footer-sign-out">
-            Sign Out
-          </a>
+
+          <div className="flex items-center gap-4">
+            {attendee && (
+              <>
+                <span style={{ color: "rgba(243, 239, 230, 0.55)" }}>
+                  Signed in as {attendee.firstName}
+                </span>
+                <span style={{ color: "rgba(243, 239, 230, 0.2)" }}>&middot;</span>
+                <a href="/identify?redirect=/" className="footer-sign-out">
+                  Switch
+                </a>
+                <span style={{ color: "rgba(243, 239, 230, 0.2)" }}>&middot;</span>
+              </>
+            )}
+            <a href="/api/logout" className="footer-sign-out">
+              Sign Out
+            </a>
+          </div>
         </div>
       </div>
     </footer>

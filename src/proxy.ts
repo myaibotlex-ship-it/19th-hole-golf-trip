@@ -1,28 +1,45 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { isValidSlug } from "./lib/attendees";
 
-const COOKIE_NAME = "gh19_auth";
+const AUTH_COOKIE = "gh19_auth";
+const USER_COOKIE = "gh19_user";
 
-// Paths that are always accessible without authentication
-const PUBLIC_PATHS = ["/login", "/api/login", "/api/logout"];
+// These paths bypass ALL checks — no cookies required
+const AUTH_FREE_PATHS = ["/login", "/api/login", "/api/logout"];
+
+// These paths require gh19_auth but NOT gh19_user
+const USER_FREE_PATHS = ["/identify", "/api/identify", "/api/identify/clear"];
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Pass through public auth paths
-  if (PUBLIC_PATHS.includes(pathname)) {
+  // Pass through paths that need no authentication at all
+  if (AUTH_FREE_PATHS.includes(pathname)) {
     return NextResponse.next();
   }
 
-  // Check for valid auth cookie
-  const auth = request.cookies.get(COOKIE_NAME);
-  if (auth?.value === "valid") {
+  // Check site-password gate
+  const auth = request.cookies.get(AUTH_COOKIE);
+  if (auth?.value !== "valid") {
+    const loginUrl = new URL("/login", request.url);
+    loginUrl.searchParams.set("redirect", pathname);
+    return NextResponse.redirect(loginUrl);
+  }
+
+  // Pass through identity paths — gh19_auth is enough, gh19_user not required
+  if (USER_FREE_PATHS.includes(pathname)) {
     return NextResponse.next();
   }
 
-  // No valid session — redirect to login, preserving intended destination
-  const loginUrl = new URL("/login", request.url);
-  loginUrl.searchParams.set("redirect", pathname);
-  return NextResponse.redirect(loginUrl);
+  // Check identity cookie — redirect to /identify if missing or unrecognised
+  const userSlug = request.cookies.get(USER_COOKIE)?.value;
+  if (!isValidSlug(userSlug)) {
+    const identifyUrl = new URL("/identify", request.url);
+    identifyUrl.searchParams.set("redirect", pathname);
+    return NextResponse.redirect(identifyUrl);
+  }
+
+  return NextResponse.next();
 }
 
 export const config = {
