@@ -465,3 +465,18 @@ label {
   background: rgba(243, 239, 230, 0.15);
   border-color: var(--color-ivory);
 }
+
+/* Unobtrusive footer sign-out link */
+.footer-sign-out {
+  color: rgba(243, 239, 230, 0.35);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: var(--text-3xs);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  transition: color var(--duration-base) var(--ease-standard);
+}
+
+.footer-sign-out:hover {
+  color: rgba(243, 239, 230, 0.7);
+}

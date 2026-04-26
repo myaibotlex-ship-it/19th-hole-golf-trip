@@ -57,7 +57,7 @@ export function Footer() {
 
         {/* Meta row */}
         <div
-          className="flex justify-between mt-7 pt-4 uppercase"
+          className="flex justify-between items-center mt-7 pt-4 uppercase"
           style={{
             borderTop: "1px solid rgba(243, 239, 230, 0.15)",
             fontFamily: "var(--font-mono)",
@@ -68,6 +68,9 @@ export function Footer() {
         >
           <span>The 19th Hole &middot; 2026</span>
           <span>Lost Balls &middot; Found Memories</span>
+          <a href="/api/logout" className="footer-sign-out">
+            Sign Out
+          </a>
         </div>
       </div>
     </footer>
