@@ -50,7 +50,7 @@ function GolfFlag() {
 
 const tripStats = [
   { number: "6", eyebrow: "ROUNDS", caption: "Across 4 days of desert golf" },
-  { number: "8", eyebrow: "DUDES", caption: "Captain: Dan Rackley" },
+  { number: "8", eyebrow: "DUDES", caption: "The Boyz" },
   { number: "4", eyebrow: "NIGHTS", caption: "Black Desert Resort + private house" },
 ];
 
