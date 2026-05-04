@@ -421,6 +421,44 @@ export function FinancesClient({
 
       {formSection}
 
+      <div className="section">
+        <div className="container-base">
+          <p className="eyebrow" style={{ marginBottom: "var(--space-6)" }}>Potentially Owed to Dan</p>
+          <div className="card" style={{ padding: "var(--space-5)" }}>
+            <div className="flex items-center justify-between gap-4">
+              <div>
+                <h3
+                  className="font-[family-name:var(--font-display)] font-bold text-[length:var(--text-lg)] leading-tight mb-1"
+                  style={{ color: "var(--fg-primary)" }}
+                >
+                  The Ledges Replay Placeholder
+                </h3>
+                <p
+                  className="font-[family-name:var(--font-body)] text-[length:var(--text-sm)]"
+                  style={{ color: "var(--fg-muted)" }}
+                >
+                  $649.04 total divided by 8 guys
+                </p>
+              </div>
+              <div className="text-right">
+                <p
+                  className="font-[family-name:var(--font-eyebrow)] font-semibold uppercase"
+                  style={{ color: "var(--accent)", fontSize: "var(--text-md)", letterSpacing: "var(--tracking-wide)" }}
+                >
+                  $81.13 each
+                </p>
+                <p
+                  className="font-[family-name:var(--font-body)] text-[length:var(--text-xs)] italic mt-1"
+                  style={{ color: "var(--fg-muted)" }}
+                >
+                  Only if the backup tee times are used
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Expenses table */}
       <div className="section">
         <div className="container-base">
