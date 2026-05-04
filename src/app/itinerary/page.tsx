@@ -48,6 +48,13 @@ const schedule: DaySchedule[] = [
         cost: "$350/person — pay individually",
         notes: "Includes carts, fore caddie, NA food & practice facility",
       },
+      {
+        period: "Evening",
+        course: "Dinner at Basalt",
+        teeTimes: "7:30 PM",
+        cost: "Reservation for 8 — under David McClain",
+        notes: "1500 East Black Desert Drive, Ivins, UT 84738. Confirmation: KKJSJ4G5NWX. 15-minute grace period; entire party must be present before table is released.",
+      },
     ],
   },
   {
