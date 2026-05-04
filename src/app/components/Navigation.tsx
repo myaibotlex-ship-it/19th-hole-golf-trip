@@ -12,8 +12,6 @@ const links = [
   { href: "/scores", label: "Scores" },
   { href: "/rsvp", label: "RSVP" },
   { href: "/finances", label: "Finances" },
-  { href: "/tasks", label: "Tasks" },
-  { href: "/merch", label: "Merch" },
   { href: "/gallery", label: "Gallery" },
 ];
 
