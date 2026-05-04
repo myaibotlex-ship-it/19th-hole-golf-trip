@@ -46,6 +46,6 @@ export const config = {
   // Exclude static assets, images, and api routes from proxy
   // Note: _next/data is always intercepted by Next.js 16 proxy regardless of matcher
   matcher: [
-    "/((?!_next/static|_next/image|favicon\\.ico|robots\\.txt|images/|assets/|api/).*)",
+    "/((?!_next/static|_next/image|favicon\\.ico|favicon-.*\\.png|apple-touch-icon\\.png|android-chrome-.*\\.png|icon\\.png|apple-icon\\.png|robots\\.txt|images/|assets/|api/).*)",
   ],
 };
