@@ -32,7 +32,7 @@ export default function RSVPPage() {
       <PageHeader
         eyebrow="The Squad"
         title="RSVP"
-        subtitle="Eight confirmed. All paid. See you in Utah."
+        subtitle="Eight confirmed. See you in Utah."
       />
 
       <section className="section">
