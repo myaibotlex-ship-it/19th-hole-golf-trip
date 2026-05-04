@@ -20,12 +20,12 @@ export async function Footer() {
         >
           <div className="flex items-center gap-4">
             <Image
-              src="/assets/assets/logo-monogram.png"
+              src="/assets/footer-monogram.png"
               alt="The 19th Hole monogram"
               width={64}
               height={64}
               className="object-contain flex-shrink-0"
-              style={{ filter: "brightness(0) invert(1)", opacity: 0.95 }}
+              style={{ opacity: 0.95 }}
             />
             <div>
               <div
