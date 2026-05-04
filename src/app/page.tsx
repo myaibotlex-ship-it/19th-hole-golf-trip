@@ -178,7 +178,7 @@ export default function Home() {
       {/* Trip Facts */}
       <section className="section">
         <div className="container-base">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8 max-w-4xl mx-auto">
             {tripStats.map((s) => (
               <div key={s.eyebrow} className="text-center py-4">
                 <p
