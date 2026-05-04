@@ -57,7 +57,7 @@ export async function Footer() {
             className="font-[family-name:var(--font-display)] italic text-right"
             style={{ fontSize: "var(--text-md)", color: "var(--color-sand)", fontWeight: 400 }}
           >
-            &ldquo;Good rounds. Great company.&rdquo;
+            lost balls. found memories
           </p>
         </div>
 
@@ -73,7 +73,7 @@ export async function Footer() {
           }}
         >
           <span>The 19th Hole &middot; 2026</span>
-          <span>Lost Balls &middot; Found Memories</span>
+          <span>lost balls. found memories</span>
 
           <div className="flex items-center gap-4">
             {attendee && (
