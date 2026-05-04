@@ -1,49 +1,26 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
-
-type Theme = "light" | "dark" | "system";
+import { createContext, useContext, useEffect, type ReactNode } from "react";
 
 const ThemeContext = createContext<{
-  theme: Theme;
-  resolved: "light" | "dark";
+  theme: "light";
+  resolved: "light";
   toggle: () => void;
-}>({ theme: "system", resolved: "light", toggle: () => {} });
+}>({ theme: "light", resolved: "light", toggle: () => {} });
 
 export function useTheme() {
   return useContext(ThemeContext);
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("system");
-  const [resolved, setResolved] = useState<"light" | "dark">("light");
-
   useEffect(() => {
-    const stored = localStorage.getItem("theme") as Theme | null;
-    if (stored) setTheme(stored);
+    localStorage.setItem("theme", "light");
+    document.documentElement.classList.remove("dark");
+    document.documentElement.classList.add("light");
   }, []);
 
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-color-scheme: dark)");
-    const resolve = () => {
-      const r = theme === "system" ? (mq.matches ? "dark" : "light") : theme;
-      setResolved(r);
-      document.documentElement.classList.toggle("dark", r === "dark");
-      document.documentElement.classList.toggle("light", r === "light");
-    };
-    resolve();
-    mq.addEventListener("change", resolve);
-    return () => mq.removeEventListener("change", resolve);
-  }, [theme]);
-
-  const toggle = () => {
-    const next: Theme = resolved === "light" ? "dark" : "light";
-    setTheme(next);
-    localStorage.setItem("theme", next);
-  };
-
   return (
-    <ThemeContext value={{ theme, resolved, toggle }}>
+    <ThemeContext value={{ theme: "light", resolved: "light", toggle: () => {} }}>
       {children}
     </ThemeContext>
   );
