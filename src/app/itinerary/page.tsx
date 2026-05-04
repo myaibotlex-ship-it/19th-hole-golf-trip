@@ -95,10 +95,9 @@ const schedule: DaySchedule[] = [
       {
         period: "Afternoon",
         course: "Copper Rock Golf Course",
-        teeTimes: "TBD",
-        cost: "TBD",
-        notes: "Not yet booked",
-        pending: true,
+        teeTimes: "2:00 PM · 2:12 PM",
+        cost: "$295/person — card hold on file",
+        notes: "Confirmed with Jon Fuller, PGA. Address: 1567 W. Copper Rock Parkway, Hurricane, UT 84737.",
       },
     ],
   },
