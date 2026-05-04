@@ -24,8 +24,8 @@ const lora = Lora({
 });
 
 export const metadata: Metadata = {
-  title: "The 19th Hole — Golf Trip Club",
-  description: "Lost Balls. Found Memories. A tradition among friends, est. 2026.",
+  title: "The 19th Hole — Utah 2026",
+  description: "lost balls. found memories",
 };
 
 export default function RootLayout({

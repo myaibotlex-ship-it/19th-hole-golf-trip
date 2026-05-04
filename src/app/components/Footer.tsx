@@ -48,7 +48,7 @@ export async function Footer() {
                   color: "var(--color-sand)",
                 }}
               >
-                Golf Trip Club &middot; Est. 2026
+                St. George, Utah &middot; Est. 2026
               </div>
             </div>
           </div>

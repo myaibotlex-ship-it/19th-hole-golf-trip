@@ -66,8 +66,8 @@ export default function Home() {
         style={{ height: "clamp(480px, 70vh, 720px)" }}
       >
         <Image
-          src="/images/hero-black-desert.jpg"
-          alt="Black Desert Golf Course, Utah"
+          src="/assets/golf-trip-hero.jpg"
+          alt="Southern Utah golf course at golden hour"
           fill
           style={{ objectFit: "cover", objectPosition: "center" }}
           priority
@@ -137,7 +137,7 @@ export default function Home() {
               marginBottom: "var(--space-7)",
             }}
           >
-            A tradition among friends. Stories that last a lifetime.
+            lost balls. found memories
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
