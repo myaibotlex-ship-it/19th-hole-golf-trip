@@ -52,7 +52,6 @@ const tripStats = [
   { number: "6", eyebrow: "ROUNDS", caption: "Across 4 days of desert golf" },
   { number: "8", eyebrow: "DUDES", caption: "Captain: Dan Rackley" },
   { number: "4", eyebrow: "NIGHTS", caption: "Black Desert Resort + private house" },
-  { number: "$0", eyebrow: "OUTSTANDING", caption: "Group settled in advance" },
 ];
 
 export default function Home() {
