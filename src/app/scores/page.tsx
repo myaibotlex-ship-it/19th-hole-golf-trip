@@ -12,14 +12,14 @@ type PlayerScores = {
 const ROUND_COUNT = 6;
 
 const INITIAL_PLAYERS: PlayerScores[] = [
-  { name: "Dan Rackley", handicap: 14, rounds: Array(ROUND_COUNT).fill(null) },
-  { name: "David McClain", handicap: 12, rounds: Array(ROUND_COUNT).fill(null) },
-  { name: "Ryan Blake", handicap: 10, rounds: Array(ROUND_COUNT).fill(null) },
-  { name: "Casey Costa", handicap: 16, rounds: Array(ROUND_COUNT).fill(null) },
-  { name: "Ryan Roth", handicap: 18, rounds: Array(ROUND_COUNT).fill(null) },
-  { name: "Grant Anderson", handicap: 8, rounds: Array(ROUND_COUNT).fill(null) },
-  { name: "Casper Heuckroth", handicap: 20, rounds: Array(ROUND_COUNT).fill(null) },
-  { name: "Eric Mehrten", handicap: 15, rounds: Array(ROUND_COUNT).fill(null) },
+  { name: "Dan Rackley", handicap: 10.5, rounds: Array(ROUND_COUNT).fill(null) },
+  { name: "David McClain", handicap: 1.5, rounds: Array(ROUND_COUNT).fill(null) },
+  { name: "Ryan Blake", handicap: 12.8, rounds: Array(ROUND_COUNT).fill(null) },
+  { name: "Casey Costa", handicap: 2.6, rounds: Array(ROUND_COUNT).fill(null) },
+  { name: "Ryan Roth", handicap: 17.6, rounds: Array(ROUND_COUNT).fill(null) },
+  { name: "Grant Anderson", handicap: 2.2, rounds: Array(ROUND_COUNT).fill(null) },
+  { name: "Casper Heuckroth", handicap: 15.4, rounds: Array(ROUND_COUNT).fill(null) },
+  { name: "Eric Mehrten", handicap: 17.0, rounds: Array(ROUND_COUNT).fill(null) },
 ];
 
 const ROUNDS = [
