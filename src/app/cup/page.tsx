@@ -76,17 +76,17 @@ function initialState(): TournamentState {
     ...data,
     state: index === 0 ? "matchup_setting" : "locked" as RoundStatus,
     picking_team: index === 0 ? "mutual" as PickingTeam : undefined as any,
-    matches: data.format === "four-ball" 
-      ? [{ id: 1, team1_players: [], team2_players: [], result: null, score_notes: "", team1_points: 0, team2_points: 0 }]
-      : Array.from({ length: 4 }, (_, i) => ({
-          id: i + 1,
-          team1_players: [],
-          team2_players: [],
-          result: null,
-          score_notes: "",
-          team1_points: 0,
-          team2_points: 0,
-        })),
+    const numPlayersPerMatch = data.format === "four-ball" ? 2 : 1;
+    const numMatches = data.format === "four-ball" ? 2 : 4;
+    matches: Array.from({ length: numMatches }, (_, i) => ({
+      id: i + 1,
+      team1_players: Array(numPlayersPerMatch).fill(""),
+      team2_players: Array(numPlayersPerMatch).fill(""),
+      result: null,
+      score_notes: "",
+      team1_points: 0,
+      team2_points: 0,
+    })),
     round_winner: null,
     round_points_team1: 0,
     round_points_team2: 0,
