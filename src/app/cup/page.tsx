@@ -71,22 +71,60 @@ const ROUNDS_DATA = [
   { number: 6, course: "Copper Rock", format: "singles" as const, points_available: 4 },
 ];
 
+function createEmptyMatches(format: "four-ball" | "singles"): Match[] {
+  const playersPerMatch = format === "four-ball" ? 2 : 1;
+  const matchCount = format === "four-ball" ? 2 : 4;
+  return Array.from({ length: matchCount }, (_, i) => ({
+    id: i + 1,
+    team1_players: Array(playersPerMatch).fill(""),
+    team2_players: Array(playersPerMatch).fill(""),
+    result: null,
+    score_notes: "",
+    team1_points: 0,
+    team2_points: 0,
+  }));
+}
+
+function normalizeRound(round: Round, index: number): Round {
+  const base = ROUNDS_DATA[index];
+  const empty = createEmptyMatches(base.format);
+  const normalizedMatches = empty.map((blank, matchIndex) => {
+    const existing = round?.matches?.[matchIndex];
+    if (!existing) return blank;
+    return {
+      ...blank,
+      ...existing,
+      id: matchIndex + 1,
+      team1_players: blank.team1_players.map((_, slot) => existing.team1_players?.[slot] ?? ""),
+      team2_players: blank.team2_players.map((_, slot) => existing.team2_players?.[slot] ?? ""),
+    };
+  });
+
+  return {
+    ...base,
+    ...round,
+    matches: normalizedMatches,
+    state: round?.state ?? (index === 0 ? "matchup_setting" : "locked"),
+    picking_team: round?.picking_team ?? (index === 0 ? "mutual" : "team1"),
+    round_winner: round?.round_winner ?? null,
+    round_points_team1: round?.round_points_team1 ?? 0,
+    round_points_team2: round?.round_points_team2 ?? 0,
+  };
+}
+
+function normalizeState(state: TournamentState): TournamentState {
+  return {
+    ...state,
+    rounds: ROUNDS_DATA.map((_, index) => normalizeRound(state.rounds?.[index] as Round, index)),
+  };
+}
+
 function initialState(): TournamentState {
   const rounds = ROUNDS_DATA.map((data, index) => ({
     ...data,
-    state: index === 0 ? "matchup_setting" : "locked" as RoundStatus,
-    picking_team: index === 0 ? "mutual" as PickingTeam : undefined as any,
-    const numPlayersPerMatch = data.format === "four-ball" ? 2 : 1;
-    const numMatches = data.format === "four-ball" ? 2 : 4;
-    matches: Array.from({ length: numMatches }, (_, i) => ({
-      id: i + 1,
-      team1_players: Array(numPlayersPerMatch).fill(""),
-      team2_players: Array(numPlayersPerMatch).fill(""),
-      result: null,
-      score_notes: "",
-      team1_points: 0,
-      team2_points: 0,
-    })),
+    state: (index === 0 ? "matchup_setting" : "locked") as RoundStatus,
+    picking_team: (index === 0 ? "mutual" : "team1") as PickingTeam,
+    matches: createEmptyMatches(data.format),
     round_winner: null,
     round_points_team1: 0,
     round_points_team2: 0,
@@ -215,8 +253,7 @@ export default function CupPage() {
     if (stored) {
       try {
         const parsed = JSON.parse(stored);
-        setTournamentState(parsed);
-        // Recalc available if needed, but since matchups change, we'll compute on fly
+        setTournamentState(normalizeState(parsed));
       } catch (e) {
         console.error("Invalid stored state");
       }
@@ -251,13 +288,20 @@ export default function CupPage() {
     const usedTeam1 = new Set<string>();
     const usedTeam2 = new Set<string>();
     round.matches.forEach(match => {
-      match.team1_players.forEach(p => usedTeam1.add(p));
-      match.team2_players.forEach(p => usedTeam2.add(p));
+      match.team1_players.filter(Boolean).forEach(p => usedTeam1.add(p));
+      match.team2_players.filter(Boolean).forEach(p => usedTeam2.add(p));
     });
     return {
       team1: PLAYERS.team1.map(p => p.name).filter(name => !usedTeam1.has(name)),
       team2: PLAYERS.team2.map(p => p.name).filter(name => !usedTeam2.has(name)),
     };
+  };
+
+  const getPlayerOptions = (roundIndex: number, team: Team, currentName: string) => {
+    const available = getAvailablePlayersForRound(roundIndex)[team];
+    return PLAYERS[team]
+      .map((p) => p.name)
+      .filter((name) => name === currentName || available.includes(name));
   };
 
   const setMatchupPlayer = (
@@ -452,7 +496,7 @@ export default function CupPage() {
                               disabled={!captainMode}
                             >
                               <option value="">Select player</option>
-                              {getAvailablePlayersForRound(index).team1.map(name => (
+                              {getPlayerOptions(index, "team1", match.team1_players[pIdx] || "").map(name => (
                                 <option key={name} value={name}>{name} (HCP {PLAYERS.team1.find(p => p.name === name)?.hcp})</option>
                               ))}
                             </select>
@@ -469,7 +513,7 @@ export default function CupPage() {
                               disabled={!captainMode}
                             >
                               <option value="">Select player</option>
-                              {getAvailablePlayersForRound(index).team2.map(name => (
+                              {getPlayerOptions(index, "team2", match.team2_players[pIdx] || "").map(name => (
                                 <option key={name} value={name}>{name} (HCP {PLAYERS.team2.find(p => p.name === name)?.hcp})</option>
                               ))}
                             </select>
