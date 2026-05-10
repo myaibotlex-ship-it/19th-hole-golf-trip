@@ -79,7 +79,7 @@ function CheckboxGrid({
             checked={selected.includes(a.slug)}
             onChange={() => toggle(a.slug)}
           />
-          {a.firstName}
+          {a.fullName}
         </label>
       ))}
     </div>
