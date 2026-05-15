@@ -46,7 +46,7 @@ function authCookieResponse(baseResponse: NextResponse): NextResponse {
 }
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
-  const sitePassword = process.env.SITE_PASSWORD;
+  const sitePassword = (process.env.SITE_PASSWORD || '').trim();
   console.log('[auth] SITE_PASSWORD length:', sitePassword ? sitePassword.length : 'undefined');
 
   // Fail-soft: if env var is not set, let all traffic through with a warning
