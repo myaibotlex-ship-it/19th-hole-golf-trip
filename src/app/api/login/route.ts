@@ -93,7 +93,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   if (!match) {
     recordFailure(ip);
     return NextResponse.json(
-      { ok: false, error: "Incorrect password" },
+      { ok: false, error: `Incorrect password (debug: len=${sitePassword ? sitePassword.length : 'null'})` },
       { status: 401 }
     );
   }
