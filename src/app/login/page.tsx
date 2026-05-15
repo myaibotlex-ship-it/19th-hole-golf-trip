@@ -1,8 +1,9 @@
 "use client";
 
 import { Suspense, useState, type FormEvent } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import Image from "next/image";
+import { ATTENDEES } from "@/lib/attendees";
 
 function GolfFlag() {
   return (
@@ -16,19 +17,18 @@ function GolfFlag() {
 
 function LoginForm() {
   const searchParams = useSearchParams();
-  const router = useRouter();
+  const [step, setStep] = useState<"password" | "name">("password");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [selectedSlug, setSelectedSlug] = useState("");
 
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handlePasswordSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setError("");
     setLoading(true);
 
     const form = e.currentTarget;
-    const password = (
-      form.elements.namedItem("password") as HTMLInputElement
-    ).value;
+    const password = (form.elements.namedItem("password") as HTMLInputElement).value;
 
     try {
       const res = await fetch("/api/login", {
@@ -40,15 +40,45 @@ function LoginForm() {
       const data: { ok: boolean; error?: string } = await res.json();
 
       if (data.ok) {
-        const redirect = searchParams.get("redirect") ?? "/";
-        // Hard redirect ensures the proxy sees the fresh cookie on the next request
-        window.location.href = redirect;
+        setStep("name");
       } else {
         setError(data.error ?? "Incorrect password");
-        setLoading(false);
       }
     } catch {
       setError("Something went wrong. Try again.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function handleNameSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setError("");
+    if (!selectedSlug) {
+      setError("Please select your name.");
+      return;
+    }
+    setLoading(true);
+
+    const redirect = searchParams.get("redirect") ?? "/";
+
+    try {
+      const res = await fetch("/api/identify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ slug: selectedSlug, redirect }),
+      });
+
+      const data: { ok: boolean; error?: string } = await res.json();
+
+      if (data.ok) {
+        window.location.href = redirect;
+      } else {
+        setError(data.error ?? "Something went wrong.");
+      }
+    } catch {
+      setError("Something went wrong. Try again.");
+    } finally {
       setLoading(false);
     }
   }
@@ -89,71 +119,149 @@ function LoginForm() {
 
         {/* Card */}
         <div className="card">
-          <div className="text-center" style={{ marginBottom: "var(--space-7)" }}>
-            <h1
-              className="font-[family-name:var(--font-display)] font-black uppercase"
-              style={{
-                fontSize: "var(--text-2xl)",
-                letterSpacing: "-0.02em",
-                lineHeight: 1.1,
-                color: "var(--fg-primary)",
-                marginBottom: "var(--space-3)",
-              }}
-            >
-              Members{" "}
-              <span style={{ fontStyle: "italic", fontWeight: "var(--weight-bold)" }}>
-                Only
-              </span>
-            </h1>
-            <p
-              className="font-[family-name:var(--font-body)]"
-              style={{
-                fontSize: "var(--text-sm)",
-                color: "var(--fg-muted)",
-                lineHeight: "var(--leading-normal)",
-              }}
-            >
-              Enter the trip password to continue.
-            </p>
-          </div>
+          {step === "password" ? (
+            <>
+              <div className="text-center" style={{ marginBottom: "var(--space-7)" }}>
+                <h1
+                  className="font-[family-name:var(--font-display)] font-black uppercase"
+                  style={{
+                    fontSize: "var(--text-2xl)",
+                    letterSpacing: "-0.02em",
+                    lineHeight: 1.1,
+                    color: "var(--fg-primary)",
+                    marginBottom: "var(--space-3)",
+                  }}
+                >
+                  Members{" "}
+                  <span style={{ fontStyle: "italic", fontWeight: "var(--weight-bold)" }}>
+                    Only
+                  </span>
+                </h1>
+                <p
+                  className="font-[family-name:var(--font-body)]"
+                  style={{
+                    fontSize: "var(--text-sm)",
+                    color: "var(--fg-muted)",
+                    lineHeight: "var(--leading-normal)",
+                  }}
+                >
+                  Enter the trip password to continue.
+                </p>
+              </div>
 
-          <form onSubmit={handleSubmit}>
-            <div style={{ marginBottom: "var(--space-6)" }}>
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                required
-                autoFocus
-                autoComplete="current-password"
-                placeholder="••••••••"
-                disabled={loading}
-              />
-            </div>
+              <form onSubmit={handlePasswordSubmit}>
+                <div style={{ marginBottom: "var(--space-6)" }}>
+                  <label htmlFor="password">Password</label>
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    required
+                    autoFocus
+                    autoComplete="current-password"
+                    placeholder="••••••••"
+                    disabled={loading}
+                  />
+                </div>
 
-            {error && (
-              <p
-                className="font-[family-name:var(--font-body)]"
-                style={{
-                  color: "var(--status-error)",
-                  fontSize: "var(--text-xs)",
-                  marginBottom: "var(--space-4)",
-                }}
-              >
-                {error}
-              </p>
-            )}
+                {error && (
+                  <p
+                    className="font-[family-name:var(--font-body)]"
+                    style={{
+                      color: "var(--status-error)",
+                      fontSize: "var(--text-xs)",
+                      marginBottom: "var(--space-4)",
+                    }}
+                  >
+                    {error}
+                  </p>
+                )}
 
-            <button
-              type="submit"
-              className="btn-primary"
-              style={{ width: "100%" }}
-              disabled={loading}
-            >
-              {loading ? "Checking..." : "Sign In"}
-            </button>
-          </form>
+                <button
+                  type="submit"
+                  className="btn-primary"
+                  style={{ width: "100%" }}
+                  disabled={loading}
+                >
+                  {loading ? "Checking..." : "Continue"}
+                </button>
+              </form>
+            </>
+          ) : (
+            <>
+              <div className="text-center" style={{ marginBottom: "var(--space-7)" }}>
+                <h1
+                  className="font-[family-name:var(--font-display)] font-black uppercase"
+                  style={{
+                    fontSize: "var(--text-2xl)",
+                    letterSpacing: "-0.02em",
+                    lineHeight: 1.1,
+                    color: "var(--fg-primary)",
+                    marginBottom: "var(--space-3)",
+                  }}
+                >
+                  Who&apos;s{" "}
+                  <span style={{ fontStyle: "italic", fontWeight: "var(--weight-bold)" }}>
+                    This?
+                  </span>
+                </h1>
+                <p
+                  className="font-[family-name:var(--font-body)]"
+                  style={{
+                    fontSize: "var(--text-sm)",
+                    color: "var(--fg-muted)",
+                    lineHeight: "var(--leading-normal)",
+                  }}
+                >
+                  Pick your name so we know who&apos;s uploading photos.
+                </p>
+              </div>
+
+              <form onSubmit={handleNameSubmit}>
+                <div style={{ marginBottom: "var(--space-6)" }}>
+                  <label htmlFor="name">Your Name</label>
+                  <select
+                    id="name"
+                    name="name"
+                    required
+                    autoFocus
+                    value={selectedSlug}
+                    onChange={(e) => setSelectedSlug(e.target.value)}
+                    disabled={loading}
+                  >
+                    <option value="" disabled>Select your name...</option>
+                    {ATTENDEES.map((a) => (
+                      <option key={a.slug} value={a.slug}>
+                        {a.fullName}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {error && (
+                  <p
+                    className="font-[family-name:var(--font-body)]"
+                    style={{
+                      color: "var(--status-error)",
+                      fontSize: "var(--text-xs)",
+                      marginBottom: "var(--space-4)",
+                    }}
+                  >
+                    {error}
+                  </p>
+                )}
+
+                <button
+                  type="submit"
+                  className="btn-primary"
+                  style={{ width: "100%" }}
+                  disabled={loading || !selectedSlug}
+                >
+                  {loading ? "Signing in..." : "Let's Go"}
+                </button>
+              </form>
+            </>
+          )}
         </div>
 
         <p
