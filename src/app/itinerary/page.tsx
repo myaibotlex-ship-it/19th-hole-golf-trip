@@ -28,9 +28,9 @@ const lodging = [
   {
     name: "House Rental",
     location: "St. George, UT",
-    checkin: "Wed Jun 3",
+    checkin: "Thu Jun 4",
     checkout: "Sun Jun 7",
-    nights: "4 nights",
+    nights: "3 nights",
     detail: "Full group",
     paid: "$2,971.93 — paid by Dan",
   },
@@ -189,7 +189,7 @@ export default function ItineraryPage() {
             className="font-[family-name:var(--font-body)] text-[length:var(--text-xs)] italic"
             style={{ color: "var(--fg-muted)" }}
           >
-            Both properties check in Jun 3. The group splits the first night — some at Black Desert Resort, remainder at the house. Full group moves to the house from Jun 4.
+            Jun 3: Full group at Black Desert Resort. Jun 4–6: Full group at the house rental, checking out Sun Jun 7.
           </p>
         </div>
       </section>
