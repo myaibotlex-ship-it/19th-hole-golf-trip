@@ -43,7 +43,7 @@ interface TournamentState {
   rounds: Round[];
 }
 
-const STORAGE_KEY = "19th-hole-cup-2026";
+const STORAGE_KEY = "19th-hole-cup-2026-r1";
 
 const TEAM_NAMES = { team1: "McClain", team2: "Costa" };
 
@@ -120,15 +120,25 @@ function normalizeState(state: TournamentState): TournamentState {
 }
 
 function initialState(): TournamentState {
-  const rounds = ROUNDS_DATA.map((data, index) => ({
-    ...data,
-    state: (index === 0 ? "matchup_setting" : "locked") as RoundStatus,
-    picking_team: (index === 0 ? "mutual" : "team1") as PickingTeam,
-    matches: createEmptyMatches(data.format),
-    round_winner: null,
-    round_points_team1: 0,
-    round_points_team2: 0,
-  }));
+  const rounds = ROUNDS_DATA.map((data, index) => {
+    const matches = createEmptyMatches(data.format);
+    // Day 1 (Round 1) matchups set by captains
+    if (index === 0) {
+      matches[0].team1_players = ["David McClain", "Grant Anderson"];
+      matches[0].team2_players = ["Casey Costa", "Eric Mehrten"];
+      matches[1].team1_players = ["Dan Rackley", "Casper Heuckroth"];
+      matches[1].team2_players = ["Ryan Blake", "Ryan Roth"];
+    }
+    return {
+      ...data,
+      state: (index === 0 ? "in_play" : "locked") as RoundStatus,
+      picking_team: (index === 0 ? "mutual" : "team1") as PickingTeam,
+      matches,
+      round_winner: null,
+      round_points_team1: 0,
+      round_points_team2: 0,
+    };
+  });
   return {
     score_team1: 0,
     score_team2: 0,
