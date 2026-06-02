@@ -49,16 +49,16 @@ const TEAM_NAMES = { team1: "McClain", team2: "Costa" };
 
 const PLAYERS: Record<Team, Player[]> = {
   team1: [
-    { name: "David McClain", hcp: 2, team: "team1" },
-    { name: "Grant Anderson", hcp: 2, team: "team1" },
-    { name: "Dan Rackley", hcp: 10, team: "team1" },
-    { name: "Casper Heuckroth", hcp: 18, team: "team1" },
+    { name: "David McClain", hcp: 1.5, team: "team1" },
+    { name: "Grant Anderson", hcp: 2.2, team: "team1" },
+    { name: "Dan Rackley", hcp: 10.5, team: "team1" },
+    { name: "Casper Heuckroth", hcp: 15.4, team: "team1" },
   ],
   team2: [
-    { name: "Casey Costa", hcp: 1, team: "team2" },
-    { name: "Ryan Blake", hcp: 12, team: "team2" },
-    { name: "Eric Mehrten", hcp: 16, team: "team2" },
-    { name: "Ryan Roth", hcp: 18, team: "team2" },
+    { name: "Casey Costa", hcp: 2.6, team: "team2" },
+    { name: "Ryan Blake", hcp: 12.8, team: "team2" },
+    { name: "Eric Mehrten", hcp: 17, team: "team2" },
+    { name: "Ryan Roth", hcp: 17.6, team: "team2" },
   ],
 };
 
